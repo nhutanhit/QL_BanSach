@@ -39,25 +39,23 @@
 </head>
 
 <body>
-<?php
-    require_once("entities/product.class.php"); 
-     require_once("entities/slide.class.php"); 
+ <?php
+		 
+		require 'Entities/product.class.php';
+		 
+		// Lấy thông tin hiển thị lên để người dùng sửa
+		require_once('config/db.class.php');
+		    $db2 = new Db();
+		    $sql2 = "Select * from category";
+		    $result1 = $db2->select_to_array($sql2);
 
-    $prods =  Product :: list_product(); 
-    require_once('config/db.class.php');
-    $db2 = new Db();
-    
-    $sql2 = "Select * from category";
-    $result1 = $db2->select_to_array($sql2);
-
-    // slide
-      $listSlide =  Slide :: listproduct(); 
-   
-    // foreach($listSlide as $item){
-    //     echo "<p>Tên sản phẩm".$item["Price"]."</p>";   
-    // }
-?>
-
+		$id = isset($_GET['ProductID']) ? (int)$_GET['ProductID'] : '';
+		if ($id){
+		    $datas = Product::get_product($_GET['ProductID']);
+		    foreach($datas as $data){
+		        $image = $data['Picture'];
+		?>
+ 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -118,85 +116,15 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
-
-    	<!-- slider -->
-    	<div class="row carousel-holder">
-            <div class="col-md-12">
-               <!--  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img class="slide-image" src="image/images.jpg" alt="">
-                        </div>
-                       
-                    </div>
-                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
-                </div> -->
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                  <!-- Indicators -->
-                  <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                  </ol>
-
-                  <!-- Wrapper for slides -->
-                  <div class="carousel-inner">
-                    <!-- <div class="item active ">
-                      <img src="image/images.jpg" alt="Los Angeles">
-                    </div>
-
-                    <div class="item ">
-                      <img src="image/images.jpg" alt="Chicago">
-                    </div>
-
-                    <div class="item">
-                      <img src="image/images.jpg" alt="New York">
-                    </div> -->
-                    <?php
-                        
-                         for($i=0; $i<count($listSlide); $i++){
-                            if($i == 0){
-                                echo " <div class='item active'>
-                                <img src='image/".$listSlide[$i]['slidename']."'> </div>";
-                            }else{
-                                echo " <div class='item'><img src='image/".$listSlide[$i]['slidename']."'> </div>";
-                            }
-                         }
-                    ?>
-                  </div>
-
-                  <!-- Left and right controls -->
-                  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </div>
-            </div>
-        </div>
-        <!-- end slide -->
-
+    <div class="container"> 
+    	 
         <div class="space20"></div> 
 
         <div class="row main-left">
             <div class="col-md-3 ">
-                <ul class="list-group" id="menu"> 
+             <ul class="list-group" id="menu"> 
                     <li href="#" class="list-group-item menu1 active">
-                    	Loại truyện tranh
+                        Loại truyện tranh
                     </li> 
                      <?php
                          foreach ($result1 as $value) {
@@ -210,12 +138,12 @@
             <div class="col-md-9">
 	            <div class="panel panel-default">            
 	            	<div class="panel-heading" style="background-color:#337AB7; color:white;" >
-	            		<h2 style="margin-top:0px; margin-bottom:0px;">Truyện mới nhất</h2>
+	            		<h2 style="margin-top:0px; margin-bottom:0px;">Chi tiết sản phẩm</h2>
 	            	</div>
 
 	            	<div class="panel-body">
                         <?php 
-                            foreach($prods as $item){ 
+                            foreach($datas as $item){ 
                                 echo "<div class='row-item row'>
                                     <div class='col-md-3'> 
                                         <a href='detail.html'>
@@ -232,15 +160,16 @@
                                          
                                      echo "  <p>Nội dung: ".$item["Description"]."</p>
                                         <h3>".$item["Price"]."VNĐ</h3>
-                                        <a class='btn btn-primary' href='productdetail.php?ProductID=".$item["ProductID"]."'>Xem chi tiết<span class='glyphicon glyphicon-chevron-right'></span></a>
+                                        <a class='btn btn-primary' href=''>Mua hàng<span class='glyphicon glyphicon-chevron-right'></span></a>
                                     </div>
-
                                     <div class='break'></div>
                                 </div>";
                             }
                         ?>
                         
-		               
+		               <div style="float: right;">
+                            <a href="index.php" >>>Back go to home</a>      
+                       </div>
 					</div>
 	            </div>
         	</div>
@@ -252,9 +181,7 @@
     <!-- Footer -->
     <hr>
     
+  <?php      
+}
+}
  
-<!-- <?php include_once("footer.php"); ?> -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
