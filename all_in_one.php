@@ -109,7 +109,7 @@
     <div class="container">
       <div class="col-md-2"></div>
         <div class="row">
-        <div class="col-md-7"><center>
+        <div class="col-md-8"><center>
             <form method="post"  enctype="multipart/form-data">
                     <div class="form-group">
                       <h1>Thông tin sản phẩm</h1>
@@ -160,7 +160,6 @@
     }}else {?>
     <div class="container">
     <div class="row">
-      <div class="col-md-2"></div>
     <div class="col-md-8"><center>
         <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
