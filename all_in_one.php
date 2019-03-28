@@ -83,17 +83,7 @@
 
 <?php include_once("header.php"); ?>
 
-<?php
-    if(isset($_GET["inserted"])){
-        echo "<h2 class='text-success text-center' >Thêm sản phẩm thành công</h2>";
-    }
-    if(isset($_GET["deleted"])){
-        echo "<h2 class='text-success text-center'>Xóa sản phẩm thành công</h2>";
-    }
-    if(isset($_GET["updated"])){
-        echo "<h2 class='text-success text-center'>Cập nhật sản phẩm thành công</h2>";
-    }
-?>
+
 
 <?php
     require_once('config/db.class.php');
@@ -217,42 +207,61 @@
     $sql2 = "Select * from category";
     $result1 = $db2->select_to_array($sql2);
 ?>
-<table class="table table-bordered mt-3">
-	<thead class="thead-dark">
- 		<tr>
- 			<th>Product ID</th>
-		    <th>Product Name</th>
-		    <th>Product Type</th>
-		    <th>Description</th>
-		    <th>Price</th>
-		    <th>Picture</th>
-			<th>Sửa</th>
-			<th>Xóa</th>
-		</tr>
-	</thead>
-<?php
-    foreach($prods as $item){
-		$id = $item["ProductID"];
-			echo "
-			<tr>
-				<td>".$item["ProductID"]."</td>
-				<td>".$item["ProductName"]."</td>";
-			foreach ($result1 as $value) {
-				if($value['CateID'] == $item['CateID'])
-					echo "<td>".$value["CategoryName"]."</td>";
-			}
+<div class="col-sm-12">
+  <?php
+      if(isset($_GET["inserted"])){
+          echo "<h2 class='text-success text-center' >Thêm sản phẩm thành công</h2>";
+      }
+      if(isset($_GET["deleted"])){
+          echo "<h2 class='text-success text-center'>Xóa sản phẩm thành công</h2>";
+      }
+      if(isset($_GET["updated"])){
+          echo "<h2 class='text-success text-center'>Cập nhật sản phẩm thành công</h2>";
+      }
+  ?>
+</div>
+<div class="col-sm-1" > </div>
+<div class="col-sm-10"  >
+  <table class="table table-bordered mt-3">
+  	<thead class="thead-dark">
+   		<tr>
+   			<th>Product ID</th>
+  		    <th>Product Name</th>
+  		    <th>Product Type</th>
+  		    <th>Description</th>
+  		    <th>Price</th>
+  		    <th>Picture</th>
+  			<th>Sửa</th>
+  			<th>Xóa</th>
+  		</tr>
+  	</thead>
+    <?php
+        foreach($prods as $item){
+    		$id = $item["ProductID"];
+    			echo "
+    			<tr>
+    				<td>".$item["ProductID"]."</td>
+    				<td>".$item["ProductName"]."</td>";
+    			foreach ($result1 as $value) {
+    				if($value['CateID'] == $item['CateID'])
+    					echo "<td>".$value["CategoryName"]."</td>";
+    			}
 
 
-			echo "	<td>".$item["Description"]."</td>
-				<td>".number_format($item["Price"])."</td>
-				<td><img src='uploads/".$item["Picture"]."' style='width:100px;height:100px'/></td>
-				<td><a class='btn btn-warning' href='all_in_one.php?edit=true&ProductID=".$item["ProductID"]."'>Sửa</a></td>
-				<td><a class='btn btn-danger' href='all_in_one.php?delete=true&ProductID=".$item["ProductID"]."'>Xóa</a></td>
-			</tr>";
+    			echo "	<td>".$item["Description"]."</td>
+    				<td>".number_format($item["Price"])."</td>
+    				<td><img src='uploads/".$item["Picture"]."' style='width:100px;height:100px'/></td>
+    				<td><a class='btn btn-warning' href='all_in_one.php?edit=true&ProductID=".$item["ProductID"]."'>Sửa</a></td>
+    				<td><a class='btn btn-danger' href='all_in_one.php?delete=true&ProductID=".$item["ProductID"]."'>Xóa</a></td>
+    			</tr>";
 
-    }
-?>
-</table>
+        }
+    ?>
+    </table>
+</div>
+<div class="col-sm-1" > </div>
+
+
 <script>
 function deletePost() {
     var ask = window.confirm("Are you sure you want to delete this post?");
