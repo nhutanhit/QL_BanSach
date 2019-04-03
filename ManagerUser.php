@@ -1,16 +1,43 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <title>Project training - website bán hàng</title>
-</head>
-<body>
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="js/sb-admin.min.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <a class="navbar-brand mr-1" href="index.php">Admin</a>
+    <!-- Navbar Search -->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </nav>
+
+  <div id="wrapper">
+    <ul class="sidebar navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="all_in_one.php">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Quản lý sản phẩm</span>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="all_in_one_category.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Quản lý thương hiệu</span></a>
+        </li>
+      </ul>
+
+
 <?php 
     require_once("Entities/user.class.php");
     if(isset($_POST["submit"])){
@@ -34,7 +61,7 @@
         }
     
 ?>
-
+<?php include_once("header.php"); ?>
 
 <?php 
     if(isset($_GET["inserted"])){
@@ -62,6 +89,7 @@
         <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
+            <h1>Quản lý User</h1>
             <form method="post">
                     <div class="form-group">
                         <label>Tên user</label>
@@ -103,6 +131,7 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <form method="POST" action="ManagerUser.php">
+            <h1>Quản lý User</h1>
             <div class="form-group">
                 <label>Tên user</label>
                 <input type="text" class="form-control" name="txtName" value="<?php echo !empty($_POST['txtName']) ? $_POST['txtName'] : ''; ?>" required>
@@ -132,7 +161,7 @@
             </div>
         </form>
         
-        <a class="btn btn-primary ml-2" href="ManagerUser.php">Back</a>
+        <a class="btn btn-primary ml-2" href="ManagerUser.php">Add</a>
         </div>
         <div class="col-md-4"></div>
     </div>
@@ -220,5 +249,4 @@ if(isset($_GET['edit']))
     }
 }
 ?>
-</body>
-</html>
+<?php include_once("footer.php"); ?>
