@@ -1,11 +1,4 @@
-/*
-+-------------------------------------------------------+
-| Code Popup m? m?t tab m?i v?i th?i gian tùy ch?nh		|
-| Coder: Endy Hoàng			     						|
-| Website: itexpress.vn, itwebs.vn, itexpressvn.com     |
-| Email: info@itexpressvn.com, skype: hoan.it           |
-+-------------------------------------------------------+
-*/
+
 function addEvent(obj, eventName, func)
 {
     if (obj.attachEvent)
@@ -22,7 +15,7 @@ function addEvent(obj, eventName, func)
     }
 }
 function Get_Cookie( name ) {
-	
+
 var start = document.cookie.indexOf( name + "=" );
 var len = start + name.length + 1;
 if ( ( !start ) &&
@@ -39,41 +32,25 @@ addEvent(window, "load", function(e)
 {
 	addEvent(document, "click", function(e)
 	{
-	  	
+
 	   var height = screen.availHeight ;
 		   var width = screen.availWidth;
 				width= width-150;
 				height= height-100;
 		   var params = "left=10,top=10,location=1,toolbar=1,status=1,menubar=1,scrollbars=1,resizable=1,width="+width+", height="+height+"";
-	   // -------------- pop 1 --------------------	
+	   // -------------- pop 1 --------------------
 	   if(Get_Cookie("itexpressvn") != 1)
-	   {	
-			var w = window.open("https://itexpress.vn",'itexpressvn', params);
+	   {
+			//var w = window.open("",'itexpressvn', params);
 			if (w)
 			{
 				var today = new Date();
-				var expires = 360000*2*1;//var expires = 3600000*24*1 = 1 ngày b?n (expires=1000 tuong ?ng v?i 1 giây);
+				var expires = 360000*2*1;//var expires = 3600000*24*1 = 1 ngï¿½y b?n (expires=1000 tuong ?ng v?i 1 giï¿½y);
 				var expires_date = new Date(today.getTime() + (expires));
 				document.cookie = "itexpressvn=1;expires=" + expires_date.toGMTString();
 				w.blur();
 				window.focus();
 			}
 		}
-	    // -------------- end pop 1 --------------------
-		// -------------- pop 2 --------------------	
-	    //if (Get_Cookie("softfreevn") != 1) {
-      //    var w = window.open("http://softfreevn.com", 'softfreevn', params);
-      //    if (w) {
-      //        var today = new Date();
-      //        var expires = 360000 * 2 * 1;//var expires = 3600000*24*1 = 1 ngày b?n (expires=1000 tuong ?ng v?i 1 giây);
-      //        var expires_date = new Date(today.getTime() + (expires));
-      //        document.cookie = "softfreevn=1;expires=" + expires_date.toGMTString();
-      //        w.blur();
-      //        window.focus();
-      //    }
-      //}
-	    // -------------- end pop 2 --------------------
-		//B?n có th? copy code trong kho?ng "---pop---" và "--- end Pop---" t?o ra nhi?u kh?i d? m? cùng lúc nhi?u trang khác nhau, và t?t nhiên
-		//b?n cung có th? tùy ch?nh th?i gian cho chúng
 	});
 });

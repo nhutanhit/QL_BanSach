@@ -8,7 +8,7 @@
     <script src="js/demo/datatables-demo.js"></script>
     <script src="js/demo/chart-area-demo.js"></script>
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="index.php">Admin</a>
+    <a class="navbar-brand mr-1" href="index.php">Quản trị viên</a>
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
@@ -27,13 +27,13 @@
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Quản lý sản phẩm</span>
+            <span>Quản lý truyện</span>
           </a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Quản lý thương hiệu</span></a>
+            <span>Quản lý loại truyện</span></a>
         </li>
       </ul>
 
@@ -67,18 +67,17 @@
 
 <?php include_once("header.php"); ?>
 
-<?php
-    if(isset($_GET["inserted"])){
-        echo "<script>alert('Thêm sản phẩm thành công')</script>";
-    }
-    if(isset($_GET["deleted"])){
-        echo "<script>alert('Xóa sản phẩm thành công')</script>";
-    }
-    if(isset($_GET["updated"])){
-        echo "<script>alert('Cập nhật sản phẩm thành công')</script>";
-    }
-?>
-
+<script>
+function myFunction(){
+var del=confirm("Bạn có muốn xóa không?");
+if (del==true){
+   alert ("Đã xóa.")
+}else{
+    window.location.href = 'all_in_one.php?failure';
+}
+return del;
+}
+</script>
 
 <?php
     require_once('config/db.class.php');
@@ -94,7 +93,7 @@
     <div class="container">
       <div class="col-md-2"></div>
         <div class="row">
-        <div class="col-md-8"><center>
+        <div class="col-md-8">
             <form method="post"  enctype="multipart/form-data">
                     <div class="form-group">
                       <h1>Thông tin sản phẩm</h1>
@@ -133,10 +132,10 @@
                         <img class="round img-thumbnail"  src="uploads/<?php echo $data['Picture']?>" style="width:100px; height:100px"/>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa sản phẩm">
+                        <center><input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa sản phẩm"><center>
                     </div>
-            </form></center>
-        <a class="btn btn-primary ml-2" href="all_in_one.php">Back</a>
+            </form>
+        <center><a class="btn btn-primary ml-2" href="all_in_one.php">Back</a></center>
             </div>
             <div class="col-md-4"></div>
         </div>
@@ -145,7 +144,7 @@
     }}else {?>
     <div class="container">
     <div class="row">
-    <div class="col-md-8"><center>
+    <div class="col-md-8">
         <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                   <h1>Thông tin sản phẩm</h1>
@@ -179,11 +178,11 @@
                     <input type="file" name="fpic" id="fpic" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input class="btn btn-primary" type="submit" name="submit" value="Thêm sản phẩm">
+                    <center><input class="btn btn-primary" type="submit" name="submit" value="Thêm sản phẩm"></center>
                 </div>
-        </form></center>
+        </form>
 
-        <a class="btn btn-primary ml-2" href="all_in_one.php">Back</a>
+        <center><a class="btn btn-primary ml-2" href="all_in_one.php">Back</a><center>
         </div>
         <div class="col-md-12"></div>
     </div>
@@ -247,7 +246,7 @@
     				<td>".number_format($item["Price"])."</td>
     				<td><img src='uploads/".$item["Picture"]."' style='width:100px;height:100px'/></td>
     				<td><a class='btn btn-warning' href='all_in_one.php?edit=true&ProductID=".$item["ProductID"]."'>Sửa</a></td>
-    				<td><a class='btn btn-danger' href='all_in_one.php?delete=true&ProductID=".$item["ProductID"]."'>Xóa</a></td>
+    				<td><a onclick='myFunction();' class='btn btn-danger' href='all_in_one.php?delete=true&ProductID=".$item["ProductID"]."'>Xóa</a></td>
     			</tr>";
 
         }
@@ -256,17 +255,6 @@
 </div>
 <div class="col-sm-1" > </div>
 
-
-<script>
-function deletePost() {
-    var ask = window.confirm("Are you sure you want to delete this post?");
-    if (ask) {
-        window.location.href = "delete_product.php?ProductID=".$id;
-    } else {
-
-	}
-}
-</script>
 <?php
 if(isset($_GET['delete'])){
 require_once("Entities/product.class.php");
