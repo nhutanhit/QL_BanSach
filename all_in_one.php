@@ -27,6 +27,7 @@
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
+<<<<<<< HEAD
             <span>Quản lý sản phẩm</span>
           </a>
         </li>
@@ -34,6 +35,31 @@
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thương hiệu</span></a>
+=======
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Quản lý sản phẩm</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="add_product.php">Thêm sản phẩm mới</a>
+            <a class="dropdown-item" href="list_product.php">Danh sách sản phẩm</a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="charts.html">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Charts</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="tables.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Tables</span></a>
+>>>>>>> 7964cd70790b633a4aef3b5bc3c0383095141561
         </li>
       </ul>
 
@@ -67,6 +93,7 @@
 
 <?php include_once("header.php"); ?>
 
+<<<<<<< HEAD
 <?php
     if(isset($_GET["inserted"])){
         echo "<script>alert('Thêm sản phẩm thành công')</script>";
@@ -78,6 +105,9 @@
         echo "<script>alert('Cập nhật sản phẩm thành công')</script>";
     }
 ?>
+=======
+
+>>>>>>> 7964cd70790b633a4aef3b5bc3c0383095141561
 
 <?php
     require_once('config/db.class.php');
@@ -215,7 +245,11 @@
   ?>
 </div>
 <div class="col-sm-1" > </div>
+<<<<<<< HEAD
 <div class="col-sm-10">
+=======
+<div class="col-sm-10"  >
+>>>>>>> 7964cd70790b633a4aef3b5bc3c0383095141561
   <table class="table table-bordered mt-3">
   	<thead class="thead-dark">
    		<tr>

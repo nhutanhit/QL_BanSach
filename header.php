@@ -20,6 +20,12 @@
     padding:1px;
     text-align: center;
     }
+<<<<<<< HEAD
+=======
+    tr:nth-child(odd){
+    background-color: #ddd;
+    }
+>>>>>>> 7964cd70790b633a4aef3b5bc3c0383095141561
     tr:hover {
         background-color: yellow;
     }
