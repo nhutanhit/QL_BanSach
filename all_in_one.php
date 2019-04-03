@@ -27,29 +27,13 @@
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-folder"></i>
             <span>Quản lý sản phẩm</span>
           </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="add_product.php">Thêm sản phẩm mới</a>
-            <a class="dropdown-item" href="list_product.php">Danh sách sản phẩm</a>
-            <div class="dropdown-divider"></div>
-          </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="charts.html">
+        <li class="nav-item active">
+          <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
+            <span>Quản lý thương hiệu</span></a>
         </li>
       </ul>
 
@@ -83,7 +67,17 @@
 
 <?php include_once("header.php"); ?>
 
-
+<?php
+    if(isset($_GET["inserted"])){
+        echo "<script>alert('Thêm sản phẩm thành công')</script>";
+    }
+    if(isset($_GET["deleted"])){
+        echo "<script>alert('Xóa sản phẩm thành công')</script>";
+    }
+    if(isset($_GET["updated"])){
+        echo "<script>alert('Cập nhật sản phẩm thành công')</script>";
+    }
+?>
 
 <?php
     require_once('config/db.class.php');
@@ -221,7 +215,7 @@
   ?>
 </div>
 <div class="col-sm-1" > </div>
-<div class="col-sm-10"  >
+<div class="col-sm-10">
   <table class="table table-bordered mt-3">
   	<thead class="thead-dark">
    		<tr>
