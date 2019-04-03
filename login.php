@@ -6,6 +6,9 @@
 <html>
 <head>
   <title></title>
+  <?php
+session_start();
+?>
   <style type="text/css">
     
 /* BASIC */
@@ -295,10 +298,9 @@ input[type=text]:placeholder {
     if(isset($_POST['login'])){
       if(isset($_POST['username']) && isset($_POST['password'])){
         $datas = User::login($_POST['username'],$_POST['password']);
-        // var_dump($datas);
-        // foreach($datas as $user){
         $user = $datas->fetch_array(MYSQLI_ASSOC);
           if($user['Username'] != null){
+            $_SESSION["logged"] = $user['Role'];
             echo "<script>window.location.href = 'all_in_one.php'; </script>";
           }
           else{
