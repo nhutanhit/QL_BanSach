@@ -93,7 +93,7 @@
                         <a href="#">Đăng ký</a>
                     </li>
                     <li>
-                        <a href="/ThucHanhPHP/LAB3/login.php">Đăng nhập</a>
+                        <a href="login.php">Đăng nhập</a>
                     </li>
                     <li>
                     	<a>
