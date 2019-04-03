@@ -2,14 +2,41 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <title>Project training - website bán hàng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <title>Website bán hàng</title>
+    <style type="text/css">
+    table{
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+    }
+    th,td{
+    border-top:1px solid gray;
+    border-bottom: 1px solid gray;
+    padding:1px;
+    text-align: center;
+    }
+    tr:nth-child(odd){
+    background-color: #ddd;
+    }
+    tr:hover {
+        background-color: yellow;
+    }
+    h2{
+        color: red;
+    }
+    h1{
+        font-weight: bold;
+    }
+    label{
+      font-weight: bold;
+    }
+    </style>
 </head>
 <body>
-    <div id="wrapper">
-        <h2 class="text-center">Project training - Xây dựng website bán hàng</h2>
+  <div class="container-full" style="margin: auto;">
+    <div class="row">
