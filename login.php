@@ -283,14 +283,31 @@ input[type=text]:placeholder {
     </div>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <a href="/ThucHanhPHP/LAB3/all_in_one.php">
-      <input type="button" class="fadeIn fourth" value="Log In">
+    <form method="POST">
+      <input type="text" id="login" class="fadeIn second" name="username" placeholder="login" value="<?php echo isset($_POST['username'])? $_POST['username']:''?>">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" value="<?php echo isset($_POST['password'])? $_POST['password']:''?>">
+      <input type="submit" name="login" class="fadeIn fourth" value="Log In">
       </a>
     </form>
 
+    <?php 
+    require_once('Entities/user.class.php');
+    if(isset($_POST['login'])){
+      if(isset($_POST['username']) && isset($_POST['password'])){
+        $datas = User::login($_POST['username'],$_POST['password']);
+        // var_dump($datas);
+        // foreach($datas as $user){
+        $user = $datas->fetch_array(MYSQLI_ASSOC);
+          if($user['Username'] != null){
+            echo "<script>window.location.href = 'index.php'; </script>";
+          }
+          else{
+            echo "Tài khoản và mật khẩu không chính xác";
+          }
+        // }
+      }
+    }
+    ?>
     <!-- Remind Passowrd -->
     <div id="formFooter">
       <a class="underlineHover" href="/ThucHanhPHP/LAB3/list_product.php">Forgot Password?</a>
