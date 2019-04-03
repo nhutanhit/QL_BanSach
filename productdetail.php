@@ -126,9 +126,9 @@
                     <li href="#" class="list-group-item menu1 active">
                         Loại truyện tranh
                     </li> 
-                     <?php
+                     <?php 
                          foreach ($result1 as $value) {
-                            echo "<li href='#' class='list-group-item menu1 '>" .$value["CategoryName"]. "</li>"; 
+                            echo "<a href='productbycategory.php?CateID=".$value["CateID"]."'><li href='#' class='list-group-item menu1 '>" .$value["CategoryName"]. "</li>"; 
                         }
                     ?>
                     
@@ -159,13 +159,14 @@
 											}
                                          
                                      echo "  <p>Nội dung: ".$item["Description"]."</p>
-                                        <h3>".$item["Price"]."VNĐ</h3>
-                                        <a class='btn btn-primary' href=''>Mua hàng<span class='glyphicon glyphicon-chevron-right'></span></a>
+                                        <h3>".number_format($item["Price"],0)." VNĐ</h3>
+                                       
                                     </div>
                                     <div class='break'></div>
                                 </div>";
                             }
                         ?>
+                         <!-- // <a class='btn btn-primary' href=''>Mua hàng<span class='glyphicon glyphicon-chevron-right'></span></a> -->
                         
 		               <div style="float: right;">
                             <a href="index.php" >>>Back go to home</a>      
@@ -181,6 +182,7 @@
     <!-- Footer -->
     <hr>
     
+  <!-- Footer --> 
   <?php      
 }
 }
