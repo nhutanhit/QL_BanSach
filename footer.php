@@ -1,6 +1,6 @@
     </div>
     <footer>
-        &#169; 2016 - No Name - VJIT
+        &#169; 2019 - Công cụ PHP - VJIT
     </footer>
   </div>
 </div>
