@@ -30,6 +30,7 @@
         color: red;
     }
     h1{
+        font-size: 33px;
         font-weight: bold;
     }
     label{
