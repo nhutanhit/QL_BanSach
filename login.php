@@ -299,7 +299,7 @@ input[type=text]:placeholder {
         // foreach($datas as $user){
         $user = $datas->fetch_array(MYSQLI_ASSOC);
           if($user['Username'] != null){
-            echo "<script>window.location.href = 'index.php'; </script>";
+            echo "<script>window.location.href = 'all_in_one.php'; </script>";
           }
           else{
             echo "Tài khoản và mật khẩu không chính xác";
