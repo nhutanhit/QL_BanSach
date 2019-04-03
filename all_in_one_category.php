@@ -1,38 +1,10 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="index.php">Admin</a>
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fas fa-search"></i>
-        </button>
-    </div>
-</div>
-</form>
-</nav>
-
-<div id="wrapper">
-    <ul class="sidebar navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="all_in_one.php">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Quản lý truyện</span>
-        </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="all_in_one_category.php">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Quản lý thương hiệu</span></a>
-    </li>
-</ul>
+ <?php include_once("bar.php"); ?>
 
 
-<?php
-require_once("Entities/category.class.php");
+ <?php
+ require_once("Entities/category.class.php");
 
-if(isset($_POST["submit"])){
+ if(isset($_POST["submit"])){
 
 
     $CategoryName = $_POST["txtName"];
@@ -55,17 +27,7 @@ if(isset($_POST["submit"])){
     <?php include_once("header.php"); ?>
 
 
-    <?php
-    if(isset($_GET["inserted"])){
-        echo "<h5>Thêm sản phẩm thành công</h5>";
-    }
-    if(isset($_GET["deleted"])){
-        echo "<h5>Xóa sản phẩm thành công</h5>";
-    }
-    if(isset($_GET["updated"])){
-        echo "<h5>Cập nhật sản phẩm thành công</h5>";
-    }
-    ?>
+
 
     <?php
     require_once('config/db.class.php');
@@ -80,19 +42,20 @@ if(isset($_POST["submit"])){
                     <div class="col-md-5">
                         <form method="post"  enctype="multipart/form-data">
                             <div class="form-group">
-                              <h1>Thông tin truyện</h1>
-                              <label>Tên truyện</label>
+                              <center><h1>Thông tin thể loại truyện</h1></center>
+                              <label>Tên thể loại truyện</label>
                               <input type="text" class="form-control" name="txtName" value="<?php echo isset($data['CategoryName']) ? $data['CategoryName'] : '' ?>" required>
                           </div>
                           <div class="form-group">
-                            <label>Mô tả truyện</label>
+                            <label>Mô tả thể loại truyện</label>
                             <textarea name="txtdesc" class="form-control" required><?php echo isset($data['Description']) ? $data['Description'] : '' ?></textarea>
                         </div>
                         <div class="form-group">
-                            <center><input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa truyện"></center>
-                        </div>
-                    </form>
-                    <center><a class="btn btn-primary ml-2" href="all_in_one_category.php">Trở lại</a><center>
+                            <center><input type="submit" class="btn btn-primary" name="btnsubmit" style="margin-left: -231px;margin-top: 8px" value="Sửa thể loại truyện"></center>
+                            <center><a class="btn btn-primary ml-2" href="all_in_one_category.php" style="margin-bottom: -6px;margin-top: -39px">Trở lại</a><center>
+                            </div>
+                        </form>
+                        
                     </div>
                     <div class="col-md-4"></div>
                 </div>
@@ -104,107 +67,130 @@ if(isset($_POST["submit"])){
                     <div class="col-md-4"></div>
                     <div class="col-md-5">
                         <form method="POST" enctype="multipart/form-data">
-                            <div class="form-group"><h1 style="font-size: 33px;">Thông tin truyện</h1>
-                                <label>Tên truyện</label>
+                            <div class="form-group"><center><h1>Thông tin thể loại truyện</h1></center>
+                                <label>Tên thể loại truyện</label>
                                 <input type="text" class="form-control" name="txtName" value="<?php echo isset($_POST['txtName']) ? $_POST['txtName'] : ''; ?>" required>
                             </div>
                             <div class="form-group">
-                                <label>Mô tả truyện</label>
+                                <label>Mô tả thể loại truyện</label>
                                 <textarea name="txtdesc" class="form-control" required><?php echo isset($_POST['txtdesc']) ? $_POST['txtdesc'] : '' ?></textarea>
+                            </div><center>
+                                <div class="form-group">
+                                    <center>
+                                        <input class="btn btn-primary" type="submit" name="submit" value="Thêm thể loại truyện" style="margin-left: -231px;margin-top: 8px"></center>
+                                        <div style="margin-left: 10px">
+                                            
+                                            <center>
+                                                <a class="btn btn-primary ml-2" href="all_in_one_category.php" style="margin-bottom: -6px;margin-top: -38px">Trở lại</a></center>    
+                                            </div>
+                                        </div></center>
+
+                                    </form>
+
+                                    
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
-                            <div class="form-group"><center>
-                                <input class="btn btn-primary" type="submit" name="submit" value="Thêm truyện">
-                            </div></center>
-                        </form>
-
-                        <center><a class="btn btn-primary ml-2" href="all_in_one.php">Trở lại</a><center>
                         </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                </div>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                    require_once("Entities/category.class.php");
+                    ?>
+
+                    <?php
+                    $cates = Category::list_category();
+                    require_once('config/db.class.php');
+                    ?>
+                    <div class="col-sm-12">
+                      <?php
+                      if(isset($_GET["inserted"])){
+                          echo "<h2 class='text-success text-center' >Thêm thể loại truyện thành công</h2>";
+                      }
+                      if(isset($_GET["deleted"])){
+                          echo "<h2 class='text-success text-center'>Xóa thể loại truyện thành công</h2>";
+                      }
+                      if(isset($_GET["updated"])){
+                          echo "<h2 class='text-success text-center'>Cập nhật thể loại truyện thành công</h2>";
+                      }
+                      ?>
+                  </div>
+                  <div class="col-sm-1" > </div>
+                  <div class="col-sm-10" style="margin-left: 10px">
+                    <table class="table table-bordered sm-3">
+                     <thead class="thead-dark">
+                       <tr>
+                        <th>ID</th>
+                        <th>Tên thể loại truyện</th>
+                        <th>Mô tả thể loại truyện</th>
+                        <th>Sửa</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
                 <?php
-            }
-            ?>
-            <?php
-            require_once("Entities/category.class.php");
-            ?>
+                foreach($cates as $item){
+                  $id = $item["CateID"];
+                  echo "
+                  <tr>
+                  <td>".$item["CateID"]."</td>
+                  <td>".$item["CategoryName"]."</td>";
+                  echo "	<td>".$item["Description"]."</td>
+                  <td><a class='btn btn-warning' href='all_in_one_category.php?edit=true&CateID=".$item["CateID"]."'>Sửa</a></td>
+                  <td><button class='btn btn-danger' onclick='myFunction(".$item["CateID"].")' >Xóa</button></td>
+                  </tr>";
 
-            <?php
-            $cates = Category::list_category();
-            require_once('config/db.class.php');
-            ?>
-            
-            <table class="table table-bordered sm-3">
-               <thead class="thead-dark">
-                 <tr>
-                    <th>ID</th>
-                    <th>Tên truyện</th>
-                    <th>Mô tả truyện</th>
-                    <th>Sửa</th>
-                    <th>Xóa</th>
-                </tr>
-            </thead>
-            <?php
-            foreach($cates as $item){
-              $id = $item["CateID"];
-              echo "
-              <tr>
-              <td>".$item["CateID"]."</td>
-              <td>".$item["CategoryName"]."</td>";
-              echo "	<td>".$item["Description"]."</td>
-              <td><a class='btn btn-warning' href='all_in_one_category.php?edit=true&CateID=".$item["CateID"]."'>Sửa</a></td>
-              <td><button class='btn btn-danger' onclick='myFunction(".$item["CateID"].")' >Xóa</button></td>
-              </tr>";
-
-          }
-          ?>
-      </table>
+              }
+              ?>
+          </table>
+      </div>
+      <div class="col-sm-1" > </div>
       <script>
         function myFunction(id) {
             var r=confirm("Bạn có muốn xóa?");
             if (r == true) {
                 window.location.href="all_in_one_category.php?delete=true&CateID="+id;
             }
-        
-    }
-</script>
-<?php
-if(isset($_GET['delete'])){
-    require_once("Entities/category.class.php");
 
-    $cates = Category::get_category($_GET['CateID']);
-    foreach($cates as $cate){
-        $CategoryName = $cate['CategoryName'];
-        $Description = $cate['Description'];
-        $newCategory = new Category($CategoryName,  $Description);
-
-        $result = $newCategory->delete($cate['CateID']);
-        if(!$result){
-            echo "<script>window.location.href = 'all_in_one_category.php?failure'; </script>";
-        }else{
-            echo "<script>window.location.href = 'all_in_one_category.php?deleted'; </script>";
         }
-    }
+    </script>
+    <?php
+    if(isset($_GET['delete'])){
+        require_once("Entities/category.class.php");
 
-}
-if (isset($_POST['btnsubmit']))
-    if(isset($_GET['edit']))
-    {
+        $cates = Category::get_category($_GET['CateID']);
+        foreach($cates as $cate){
+            $CategoryName = $cate['CategoryName'];
+            $Description = $cate['Description'];
+            $newCategory = new Category($CategoryName,  $Description);
 
-        $CategoryName = $_POST["txtName"];
-        $Description = $_POST["txtdesc"];
-        $newCategory = new Category($CategoryName, $Description);
-        $result = $newCategory->update($_GET['CateID']);
-
-        if($result ){
-
-            echo "<script>window.location.href = 'all_in_one_category.php?updated'; </script>";
-        }else{
-            echo "<script>window.location.href = 'all_in_one_category.php?failure'; </script>";
+            $result = $newCategory->delete($cate['CateID']);
+            if(!$result){
+                echo "<script>window.location.href = 'all_in_one_category.php?failure'; </script>";
+            }else{
+                echo "<script>window.location.href = 'all_in_one_category.php?deleted'; </script>";
+            }
         }
 
-
-    } else {
     }
-    ?>
-    <?php include_once("footer.php"); ?>
+    if (isset($_POST['btnsubmit']))
+        if(isset($_GET['edit']))
+        {
+
+            $CategoryName = $_POST["txtName"];
+            $Description = $_POST["txtdesc"];
+            $newCategory = new Category($CategoryName, $Description);
+            $result = $newCategory->update($_GET['CateID']);
+
+            if($result ){
+
+                echo "<script>window.location.href = 'all_in_one_category.php?updated'; </script>";
+            }else{
+                echo "<script>window.location.href = 'all_in_one_category.php?failure'; </script>";
+            }
+
+
+        } else {
+        }
+        ?>
+        <?php include_once("footer.php"); ?>

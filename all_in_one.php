@@ -33,7 +33,7 @@
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Quản lý thương hiệu</span></a>
+            <span>Quản lý thể loại truyện </span></a>
         </li>
       </ul>
 
