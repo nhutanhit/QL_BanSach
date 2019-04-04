@@ -1,5 +1,10 @@
- <?php include_once("bar.php"); ?>
 
+ <?php include_once("bar.php"); ?>
+<style type="text/css">
+        tr:hover {
+        background-color: yellow;
+    }
+  </style>
 
  <?php
  require_once("Entities/category.class.php");
