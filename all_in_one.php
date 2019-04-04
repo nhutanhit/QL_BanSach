@@ -24,19 +24,17 @@
 <script type="text/javascript" src="js/noel.js"></script>
   <div id="wrapper">
     <ul class="sidebar navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="all_in_one.php">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Quản lý truyện</span>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Quản lý</span>
           </a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="all_in_one_category.php">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Quản lý loại truyện</span></a>
-        </li>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="all_in_one_category.php">Loại Truyện</a>
+            <a class="dropdown-item" href="all_in_one.php">Truyện</a>
+            <div class="dropdown-divider"></div>
+          </div>
       </ul>
-
 
 <?php
     require_once("Entities/product.class.php");
