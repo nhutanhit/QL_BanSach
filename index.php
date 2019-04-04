@@ -20,7 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Laravel Khoa Pham</title>
+    <title>Bán sách</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -40,17 +40,21 @@
 
 <body>
 <?php
-    require_once("entities/product.class.php"); 
+     require_once("entities/product.class.php"); 
+     require_once("entities/slide.class.php"); 
 
+     //sp
     $prods =  Product :: list_product(); 
     require_once('config/db.class.php');
     $db2 = new Db();
+    
+    // loại sp
     $sql2 = "Select * from category";
     $result1 = $db2->select_to_array($sql2);
 
-    // foreach($prods as $item){
-    //     echo "<p>Tên sản phẩm".$item["Price"]."</p>";   
-    // }
+    // slide
+      $listSlide =  Slide :: listproduct(); 
+    
 ?>
 
     <!-- Navigation -->
@@ -89,7 +93,7 @@
                         <a href="#">Đăng ký</a>
                     </li>
                     <li>
-                        <a href="/ThucHanhPHP/LAB3/login.php">Đăng nhập</a>
+                        <a href="login.php">Đăng nhập</a>
                     </li>
                     <li>
                     	<a>
@@ -118,7 +122,7 @@
     	<!-- slider -->
     	<div class="row carousel-holder">
             <div class="col-md-12">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+               <!--  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -136,102 +140,69 @@
                     <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
+                </div> -->
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner">
+                    <!-- <div class="item active ">
+                      <img src="image/images.jpg" alt="Los Angeles">
+                    </div>
+
+                    <div class="item ">
+                      <img src="image/images.jpg" alt="Chicago">
+                    </div>
+
+                    <div class="item">
+                      <img src="image/images.jpg" alt="New York">
+                    </div> -->
+                    <?php
+                        
+                         for($i=0; $i<count($listSlide); $i++){
+                            if($i == 0){
+                                echo " <div class='item active'>
+                                <img style = 'width: 100%;' src='image/".$listSlide[$i]['slidename']."'> </div>";
+                            }else{
+                                echo " <div class='item'><img style = 'width: 100%;' src='image/".$listSlide[$i]['slidename']."'> </div>";
+                            }
+                         }
+                    ?>
+                  </div>
+
+                  <!-- Left and right controls -->
+                  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
                 </div>
             </div>
         </div>
         <!-- end slide -->
 
-        <div class="space20"></div>
-
+        <div class="space20"></div> 
 
         <div class="row main-left">
             <div class="col-md-3 ">
-                <ul class="list-group" id="menu">
+                <ul class="list-group" id="menu"> 
                     <li href="#" class="list-group-item menu1 active">
-                    	Menu
-                    </li>
-
-                    <li href="#" class="list-group-item menu1">
-                    	Level 1
-                    </li>
-                    <ul>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                    </ul>
-
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
-                    <ul>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                    </ul>
-
-
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
-
-                    <ul>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                    </ul>
-
-
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
-                    <ul>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                		<li class="list-group-item">
-                			<a href="#">Level2</a>
-                		</li>
-                    </ul>
-
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
-                    <li href="#" class="list-group-item menu1">
-                    	<a href="#">Level 1</a>
-                    </li>
+                    	Loại truyện tranh
+                    </li> 
+                     <?php
+                         foreach ($result1 as $value) {
+                            echo "<a href='productbycategory.php?CateID=".$value["CateID"]."'><li href='#' class='list-group-item menu1 '>" .$value["CategoryName"]. "</li>"; 
+                        }
+                    ?>
+                    
                 </ul>
             </div>
 
@@ -259,8 +230,10 @@
 											}
                                          
                                      echo "  <p>Nội dung: ".$item["Description"]."</p>
-                                        <a class='btn btn-primary href='detail.html'>".$item["Quantity"]."000.VNĐ<span class='glyphicon glyphicon-chevron-right'></span></a>
+                                        <h3>".number_format($item["Price"],0)." VNĐ</h3>
+                                        <a class='btn btn-primary' href='productdetail.php?ProductID=".$item["ProductID"]."'>Xem chi tiết<span class='glyphicon glyphicon-chevron-right'></span></a>
                                     </div>
+
                                     <div class='break'></div>
                                 </div>";
                             }
@@ -277,6 +250,41 @@
 
     <!-- Footer -->
     <hr>
-    
+    <!-- Footer -->
+<footer class="page-footer font-small blue pt-4" style="text-align: center;     background: #222222; color: while">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-md-6 mt-md-0 mt-3">
+
+          <!-- Content -->
+          <h5 class="text-uppercase">BÁN SÁCH</h5>
+          <a href="">
+          <p>Anh.Trần | Minh Mẫn | Anh Kiệt | An Khang | Vũ Khanh</p>
+            </a>
+        </div>
+        <!-- Grid column -->
  
-<?php include_once("footer.php"); ?>
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="https://mdbootstrap.com/education/bootstrap/"> admin.com</a>
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer --> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->

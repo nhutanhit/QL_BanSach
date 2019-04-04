@@ -54,5 +54,12 @@ class Product
         $result = $db->query_execute($sql);
         return $result;
     }
+
+      public function get_product_by_CateID($id){
+        $db = new Db();
+        $sql = "SELECT * FROM product where CateID =".$id;
+        $result = $db->query_execute($sql);
+        return $result;
+    }
 }
 ?>
