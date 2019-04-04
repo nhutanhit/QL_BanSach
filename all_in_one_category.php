@@ -135,7 +135,7 @@
                   <tr>
                   <td>".$item["CateID"]."</td>
                   <td>".$item["CategoryName"]."</td>";
-                  echo "	<td>".$item["Description"]."</td>
+                  echo "    <td>".$item["Description"]."</td>
                   <td><a class='btn btn-warning' href='all_in_one_category.php?edit=true&CateID=".$item["CateID"]."'>Sửa</a></td>
                   <td><button class='btn btn-danger' onclick='myFunction(".$item["CateID"].")' >Xóa</button></td>
                   </tr>";
