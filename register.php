@@ -1,60 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <title>Project training - Website bán Sách</title>
-</head>
-<body>
- ss
 
-</body>
-</html> -->
-<!--  -->
-<!-- <?php include_once("header.php"); ?>
-    <ul class="menu">
-        <li>
-            <a href="/ThucHanhPHP/LAB3/list_product.php">Danh sách sản phẩm</a>
-        </li>
-        <li>
-            <a href="/ThucHanhPHP/LAB3/add_product.php">Thêm sản phẩm</a>
-        </li>
-    </ul>
-<?php include_once("footer.php") ?> -->
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Bán sách</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-    <link href="css/my.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
 
 <body>
 <?php
@@ -159,7 +103,7 @@
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                 </div> -->
-               
+
             </div>
         </div>
         <!-- end slide -->
@@ -198,18 +142,18 @@
               <?php
                   if(isset($_GET["inserted"])){
                       echo "<script>alert('Đăng ký thành công')</script>";
-                      echo '<script>location.replace("ManagerUser.php");</script>';
+                      echo '<script>location.replace("index.php");</script>';
                   }
               ?>
                   <div class="container">
                   <div class="row">
                   <div class="col-md-4"></div>
-                  <div class="col-md-4">
-                    <h2>Đăng Ký Tài khoản<h2>
+                  <div class="col-md-4" style="margin-top: 100px;">
+                    <h1>Đăng Ký Tài khoản<h1>
                       <form method="POST" action="register.php">
                           <div class="form-group">
                               <label>Tên user</label>
-                              <input type="text" class="form-control" name="txtName" value="<?php echo !empty($_POST['txtName']) ? $_POST['txtName'] : ''; ?>" required>
+                              <input type="text" class="form-control" name="txtName" autofocus value="<?php echo !empty($_POST['txtName']) ? $_POST['txtName'] : ''; ?>" required>
                           </div>
                           <div class="form-group">
                               <label>Tài khoản</label>
@@ -217,7 +161,7 @@
                           </div>
                           <div class="form-group">
                               <label>Mật khẩu</label>
-                              <input type="text" name="txtPassword" class="form-control" value="<?php echo !empty($_POST['txtPassword']) ? $_POST['txtPassword'] : '' ?>" required>
+                              <input type="password" name="txtPassword" class="form-control" value="<?php echo !empty($_POST['txtPassword']) ? $_POST['txtPassword'] : '' ?>" required>
                           </div>
                           <div class="form-group">
                               <label>Địa chỉ</label>
@@ -225,7 +169,7 @@
                           </div>
                           <div class="form-group">
                               <label>SĐT</label>
-                              <input type="text" name="txtPhone" class="form-control" value="<?php echo !empty($_POST['txtPhone']) ? $_POST['txtPhone'] : '' ?>" required>
+                              <input type="number" name="txtPhone" class="form-control" value="<?php echo !empty($_POST['txtPhone']) ? $_POST['txtPhone'] : '' ?>" required>
                           </div>
                           <div class="form-group">
                               <input class="btn btn-primary" type="submit" name="submit" value="Đăng ký">
