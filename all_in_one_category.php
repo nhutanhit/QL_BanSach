@@ -1,4 +1,4 @@
-
+<script type="text/javascript" src="js/noel.js"></script>
  <?php include_once("bar.php"); ?>
 <style type="text/css">
         tr:hover {
