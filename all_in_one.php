@@ -21,6 +21,11 @@
       </div>
     </form>
   </nav>
+  <style type="text/css">
+        tr:hover {
+        background-color: yellow;
+    }
+  </style>
 <script type="text/javascript" src="js/noel.js"></script>
   <div id="wrapper">
    
@@ -108,60 +113,62 @@
             $image = $data['Picture'];
     ?>
     <div class="container">
-      <div class="col-md-2"></div>
+     
         <div class="row">
-        <div class="col-md-8">
-            <form method="post"  enctype="multipart/form-data">
-                    <div class="form-group">
-                      <h1>Thông tin sản phẩm</h1>
-                        <label>Tên sản phẩm</label>
-                        <input type="text" class="form-control" name="txtName" value="<?php echo isset($data['ProductName']) ? $data['ProductName'] : '' ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Mô tả sản phẩm</label>
-                        <textarea name="txtdesc" class="form-control" required><?php echo isset($data['Description']) ? $data['Description'] : '' ?></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Số lượng sản phẩm</label>
-                        <input type="text" class="form-control" name="txtquantity" value="<?php echo isset($data['Quantity']) ? $data['Quantity'] : '' ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Giá bán</label>
-                        <input type="text" class="form-control" name="txtprice" value="<?php echo isset($data['Price']) ? $data['Price'] : '' ?>"required>
-                    </div>
-                    <div class="form-group">
-                        <label>Chọn loại sản phẩm</label>
-                        <select name="txtCateID" class="form-control">
-                        <?php
-                        foreach($result1 as $item){
-                            if($data['CateID'] == $item["CateID"]){
-                                echo '<option value="'.$item["CateID"].'" selected>'.$item["CategoryName"].'</option>';
-                            }else {
-                                echo '<option value="'.$item["CateID"].'">'.$item["CategoryName"].'</option>';
-                            }
-                            }
-                        ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Đường dẫn hình</label>
-                        <input type="file" name="fpic" id="fpic" class="form-control">
-                        <img class="round img-thumbnail"  src="uploads/<?php echo $data['Picture']?>" style="width:100px; height:100px"/>
-                    </div>
-                    <div class="form-group">
-                        <center><input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa sản phẩm"><center>
-                    </div>
-            </form>
-        <center><a class="btn btn-primary ml-2" href="all_in_one.php">Back</a></center>
+            <div class="col-md-2"></div>
+            <div class="col-sm-10" >
+                <form method="post"  enctype="multipart/form-data">
+                        <div class="form-group">
+                          <h1>Thông tin sản phẩm</h1>
+                            <label>Tên sản phẩm</label>
+                            <input type="text" class="form-control" name="txtName" value="<?php echo isset($data['ProductName']) ? $data['ProductName'] : '' ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả sản phẩm</label>
+                            <textarea name="txtdesc" class="form-control" required><?php echo isset($data['Description']) ? $data['Description'] : '' ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Số lượng sản phẩm</label>
+                            <input type="text" class="form-control" name="txtquantity" value="<?php echo isset($data['Quantity']) ? $data['Quantity'] : '' ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá bán</label>
+                            <input type="text" class="form-control" name="txtprice" value="<?php echo isset($data['Price']) ? $data['Price'] : '' ?>"required>
+                        </div>
+                        <div class="form-group">
+                            <label>Chọn loại sản phẩm</label>
+                            <select name="txtCateID" class="form-control">
+                            <?php
+                            foreach($result1 as $item){
+                                if($data['CateID'] == $item["CateID"]){
+                                    echo '<option value="'.$item["CateID"].'" selected>'.$item["CategoryName"].'</option>';
+                                }else {
+                                    echo '<option value="'.$item["CateID"].'">'.$item["CategoryName"].'</option>';
+                                }
+                                }
+                            ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Đường dẫn hình</label>
+                            <input type="file" name="fpic" id="fpic" class="form-control">
+                            <img class="round img-thumbnail"  src="uploads/<?php echo $data['Picture']?>" style="width:100px; height:100px"/>
+                        </div>
+                        <div class="form-group">
+                            <center><input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa sản phẩm"><center>
+                        </div>
+                </form>
+                  <center><a class="btn btn-primary ml-2" href="all_in_one.php">Back</a></center>
             </div>
-            <div class="col-md-4"></div>
+             <div class="col-md-2"></div>
         </div>
     </div>
      <?php
     }}else {?>
     <div class="container">
     <div class="row">
-    <div class="col-md-8">
+         <div class="col-md-2"></div>
+        <div class="col-md-8">
         <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                   <h1>Thông tin sản phẩm</h1>
@@ -202,6 +209,7 @@
         <center><a class="btn btn-primary ml-2" href="all_in_one.php">Back</a><center>
         </div>
         <div class="col-md-12"></div>
+         <div class="col-md-2"></div>
     </div>
 </div>
     <?php
@@ -218,7 +226,7 @@
     $sql2 = "Select * from category";
     $result1 = $db2->select_to_array($sql2);
 ?>
-<div class="col-sm-12">
+<div class="col-sm-12" >
   <?php
       if(isset($_GET["inserted"])){
           echo "<h2 class='text-success text-center' >Thêm sản phẩm thành công</h2>";

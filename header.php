@@ -26,10 +26,10 @@
     padding:1px;
     text-align: center;
     }
-    tr:nth-child(odd){
+   /* tr:nth-child(odd){
     background-color: #ddd;
     }
- 
+ */
     text-align: center;
     }
  
