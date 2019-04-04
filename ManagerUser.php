@@ -23,18 +23,23 @@
   </nav>
 
   <div id="wrapper">
-    <ul class="sidebar navbar-nav">
+   <ul class="sidebar navbar-nav"> 
+        <li class="nav-item active">
+          <a class="nav-link" href="ManagerUser.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Quản lý tài khoản</span></a>
+        </li>
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Quản lý sản phẩm</span>
-          </a>
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Quản lý truyện </span></a>
         </li>
-        <li class="nav-item active">
+ 
+         <li class="nav-item active">
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Quản lý thương hiệu</span></a>
-        </li>
+            <span>Quản lý thể loại truyện </span></a>
+        </li> 
       </ul>
 
 

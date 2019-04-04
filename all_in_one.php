@@ -23,25 +23,24 @@
   </nav>
 <script type="text/javascript" src="js/noel.js"></script>
   <div id="wrapper">
-    <ul class="sidebar navbar-nav">
- 
+   
+    <ul class="sidebar navbar-nav"> 
         <li class="nav-item active">
+          <a class="nav-link" href="ManagerUser.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Quản lý tài khoản</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="all_in_one.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Quản lý truyện </span></a>
+        </li>
+ 
+         <li class="nav-item active">
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
-        </li>
- 
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Quản lý</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="all_in_one_category.php">Loại Truyện</a>
-            <a class="dropdown-item" href="all_in_one.php">Truyện</a>
-            <div class="dropdown-divider"></div>
-          </div>
- 
+        </li> 
       </ul>
 
 <?php
