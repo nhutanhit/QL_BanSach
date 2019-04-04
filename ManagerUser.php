@@ -26,9 +26,9 @@
       </div>
     </form>
   </nav>
-
+<script type="text/javascript" src="js/noel.js"></script>
   <div id="wrapper">
-   <ul class="sidebar navbar-nav"> 
+   <ul class="sidebar navbar-nav">
         <li class="nav-item active">
           <a class="nav-link" href="ManagerUser.php">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -39,19 +39,19 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý truyện </span></a>
         </li>
- 
+
          <li class="nav-item active">
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
-        </li> 
+        </li>
       </ul>
 
 
-<?php 
+<?php
     require_once("Entities/user.class.php");
     if(isset($_POST["submit"])){
-        
+
         $fullname = $_POST["txtName"];
         $username = $_POST["txtUsername"];
         $password = $_POST["txtPassword"];
@@ -60,7 +60,7 @@
         $role =  $_POST["txtRole"];
 
         $newUser = new User($fullname, $username, $password, $address, $phone, $role);
-        
+
         $result = $newUser->save();
         if($result){
             header("Location: ManagerUser.php?inserted");
@@ -69,11 +69,11 @@
         }} else {
 
         }
-    
+
 ?>
 <?php include_once("header.php"); ?>
 
-<?php 
+<?php
     if(isset($_GET["inserted"])){
         echo "<script>alert('Thêm user thành công')</script>";
         // echo '<script>location.replace("ManagerUser.php");</script>';
@@ -88,7 +88,7 @@
     }
 ?>
 
-<?php 
+<?php
     require_once('config/db.class.php');
     if(isset($_GET['edit'])){
     $id = isset($_GET['UserID']) ? (int)$_GET['UserID'] : '';
@@ -128,13 +128,13 @@
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa user">
                 </div>
-            </form> 
+            </form>
             <a class="btn btn-primary ml-2" href="ManagerUser.php">Back</a>
         </div>
         <div class="col-md-4"></div>
         </div>
     </div>
-     <?php      
+     <?php
     }}else {?>
     <div class="container">
         <div class="row">
@@ -170,25 +170,25 @@
                         <input class="btn btn-primary" type="submit" name="submit" value="Thêm User">
                     </div>
                 </form>
-                
+
                 <a class="btn btn-primary ml-2" href="ManagerUser.php">Add</a>
             </div>
             <div class="col-md-4"></div>
         </div>
     </div>
-    <?php 
+    <?php
     }
      ?>
-<?php 
+<?php
     require_once("Entities/user.class.php");
 ?>
 
-<?php 
+<?php
     $users = user::list_user();
     rsort($users);
 	require_once('config/db.class.php');
 ?>
-<table class="table table-bordered mt-3"> 
+<table class="table table-bordered mt-3">
 	<thead class="thead-dark">
  		<tr>
  			<th>Tên user</th>
@@ -269,7 +269,7 @@ if(isset($_GET['edit']))
     $result = $newUser->update($_GET['UserID']);
 
     if($result){
-        
+
         echo "<script>window.location.href = 'ManagerUser.php?updated'; </script>";
     }else{
         echo "<script>window.location.href = 'ManagerUser.php?failure'; </script>";
