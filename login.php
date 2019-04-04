@@ -127,7 +127,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text] {
+input[type=text],input[type=password] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -148,12 +148,12 @@ input[type=text] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=password]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder {
+input[type=text]:placeholder, input[type=password]:placeholder {
   color: #cccccc;
 }
 
@@ -287,8 +287,8 @@ input[type=text]:placeholder {
 
     <!-- Login Form -->
     <form method="POST">
-      <input type="text" id="login" class="fadeIn second" name="username" placeholder="login" value="<?php echo isset($_POST['username'])? $_POST['username']:''?>">
-      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" value="<?php echo isset($_POST['password'])? $_POST['password']:''?>">
+      <input type="text" id="login" class="fadeIn second" name="username" required placeholder="login" value="<?php echo isset($_POST['username'])? $_POST['username']:''?>">
+      <input type="password" id="password" class="fadeIn third" name="password" required placeholder="password" value="<?php echo isset($_POST['password'])? $_POST['password']:''?>">
       <input type="submit" name="login" class="fadeIn fourth" value="Log In">
       </a>
     </form>
@@ -312,7 +312,7 @@ input[type=text]:placeholder {
     ?>
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="/ThucHanhPHP/LAB3/list_product.php">Forgot Password?</a>
+      <a class="underlineHover" href="register.php">Đăng ký</a>
     </div>
 
   </div>

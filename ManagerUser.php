@@ -7,6 +7,11 @@
     <script src="js/sb-admin.min.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
     <script src="js/demo/chart-area-demo.js"></script>
+      <style type="text/css">
+        tr:hover {
+        background-color: yellow;
+    }
+  </style>
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <a class="navbar-brand mr-1" href="index.php">Admin</a>
     <!-- Navbar Search -->
