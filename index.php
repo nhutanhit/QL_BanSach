@@ -40,21 +40,21 @@
 
 <body>
 <?php
-     require_once("entities/product.class.php"); 
-     require_once("entities/slide.class.php"); 
+     require_once("entities/product.class.php");
+     require_once("entities/slide.class.php");
 
      //sp
-    $prods =  Product :: list_product(); 
+    $prods =  Product :: list_product();
     require_once('config/db.class.php');
     $db2 = new Db();
-    
+
     // loại sp
     $sql2 = "Select * from category";
     $result1 = $db2->select_to_array($sql2);
 
     // slide
-      $listSlide =  Slide :: listproduct(); 
-    
+      $listSlide =  Slide :: listproduct();
+
 ?>
 
     <!-- Navigation -->
@@ -90,7 +90,7 @@
 
 			    <ul class="nav navbar-nav pull-right">
                     <li>
-                        <a href="#">Đăng ký</a>
+                        <a href="register.php">Đăng ký</a>
                     </li>
                     <li>
                         <a href="login.php">Đăng nhập</a>
@@ -105,12 +105,12 @@
                     <li>
                     	<a href="#">Đăng xuất</a>
                     </li>
-                    
+
                 </ul>
             </div>
 
 
-            
+
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -132,7 +132,7 @@
                         <div class="item active">
                             <img class="slide-image" src="image/images.jpg" alt="">
                         </div>
-                       
+
                     </div>
                     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -163,7 +163,7 @@
                       <img src="image/images.jpg" alt="New York">
                     </div> -->
                     <?php
-                        
+
                          for($i=0; $i<count($listSlide); $i++){
                             if($i == 0){
                                 echo " <div class='item active'>
@@ -189,46 +189,46 @@
         </div>
         <!-- end slide -->
 
-        <div class="space20"></div> 
+        <div class="space20"></div>
 
         <div class="row main-left">
             <div class="col-md-3 ">
-                <ul class="list-group" id="menu"> 
+                <ul class="list-group" id="menu">
                     <li href="#" class="list-group-item menu1 active">
                     	Loại truyện tranh
-                    </li> 
+                    </li>
                      <?php
                          foreach ($result1 as $value) {
-                            echo "<a href='productbycategory.php?CateID=".$value["CateID"]."'><li href='#' class='list-group-item menu1 '>" .$value["CategoryName"]. "</li>"; 
+                            echo "<a href='productbycategory.php?CateID=".$value["CateID"]."'><li href='#' class='list-group-item menu1 '>" .$value["CategoryName"]. "</li>";
                         }
                     ?>
-                    
+
                 </ul>
             </div>
 
             <div class="col-md-9">
-	            <div class="panel panel-default">            
+	            <div class="panel panel-default">
 	            	<div class="panel-heading" style="background-color:#337AB7; color:white;" >
 	            		<h2 style="margin-top:0px; margin-bottom:0px;">Truyện mới nhất</h2>
 	            	</div>
 
 	            	<div class="panel-body">
-                        <?php 
-                            foreach($prods as $item){ 
+                        <?php
+                            foreach($prods as $item){
                                 echo "<div class='row-item row'>
-                                    <div class='col-md-3'> 
+                                    <div class='col-md-3'>
                                         <a href='detail.html'>
                                             <br>
                                             <img width='200px' height='200px' class='img-responsive' src='uploads/".$item["Picture"]."'>
                                         </a>
-                                    </div> 
+                                    </div>
                                     <div class='col-md-9'>
                                         <h3>".$item["ProductName"]."</h3>";
                                         foreach ($result1 as $value) {
 												if($value['CateID'] == $item['CateID'])
-													echo "<h4> Thể loại:".$value["CategoryName"]."</h4>"; 
+													echo "<h4> Thể loại:".$value["CategoryName"]."</h4>";
 											}
-                                         
+
                                      echo "  <p>Nội dung: ".$item["Description"]."</p>
                                         <h3>".number_format($item["Price"],0)." VNĐ</h3>
                                         <a class='btn btn-primary' href='productdetail.php?ProductID=".$item["ProductID"]."'>Xem chi tiết<span class='glyphicon glyphicon-chevron-right'></span></a>
@@ -238,8 +238,8 @@
                                 </div>";
                             }
                         ?>
-                        
-		               
+
+
 					</div>
 	            </div>
         	</div>
@@ -269,7 +269,7 @@
             </a>
         </div>
         <!-- Grid column -->
- 
+
       </div>
       <!-- Grid row -->
 
@@ -283,7 +283,7 @@
     <!-- Copyright -->
 
   </footer>
-  <!-- Footer --> 
+  <!-- Footer -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
