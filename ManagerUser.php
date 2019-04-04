@@ -191,6 +191,7 @@
 <table class="table table-bordered mt-3"> 
 	<thead class="thead-dark">
  		<tr>
+ 			<th>ID</th>
  			<th>Tên user</th>
 		    <th>Tài khoản</th>
 		    <th>Mật khẩu</th>
@@ -208,7 +209,8 @@
         if($i == 1 && isset($_GET['inserted'])){
 			echo "
 			<tr style='background-color: #1ec908'>
-				<td>".$user["UserID"]."</td>
+                <td>".$user["UserID"]."</td>
+                <td>".$user["FullName"]."</td>
                 <td>".$user["Username"]."</td>
                 <td>".$user["Password"]."</td>
 				<td>".$user["Address"]."</td>
@@ -221,6 +223,7 @@
             echo "
 			<tr>
 				<td>".$user["UserID"]."</td>
+                <td>".$user["FullName"]."</td>
                 <td>".$user["Username"]."</td>
                 <td>".$user["Password"]."</td>
 				<td>".$user["Address"]."</td>
