@@ -1,24 +1,17 @@
-
-
 <body>
 <?php
      require_once("entities/product.class.php");
      require_once("entities/slide.class.php");
-
      //sp
     $prods =  Product :: list_product();
     require_once('config/db.class.php');
     $db2 = new Db();
-
     // loại sp
     $sql2 = "Select * from category";
     $result1 = $db2->select_to_array($sql2);
-
     // slide
       $listSlide =  Slide :: listproduct();
-
 ?>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -30,7 +23,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Home</a>
+                <a class="navbar-brand" href="index.php">Home</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -60,7 +53,7 @@
                     <li>
                     	<a>
                     		<span class ="glyphicon glyphicon-user"></span>
-                    		Bùi Đức Phú
+                    		KhanhDV
                     	</a>
                     </li>
 
@@ -70,17 +63,12 @@
 
                 </ul>
             </div>
-
-
-
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
-
     <!-- Page Content -->
     <div class="container">
-
     	<!-- slider -->
     	<div class="row carousel-holder">
             <div class="col-md-12">
@@ -103,17 +91,11 @@
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                 </div> -->
-
             </div>
         </div>
         <!-- end slide -->
-
         <div class="space20"></div>
-
         <div class="row main-left">
-
-
-
             <div class="col-md-9">
               <?php
                   require_once("Entities/user.class.php");
@@ -134,11 +116,8 @@
                       }else{
                           header("Location: register.php?failure");
                       }} else {
-
                       }
-
               ?>
-
               <?php
                   if(isset($_GET["inserted"])){
                       echo "<script>alert('Đăng ký thành công')</script>";
@@ -149,7 +128,7 @@
                   <div class="row">
                   <div class="col-md-4"></div>
                   <div class="col-md-4" style="margin-top: 100px;">
-                    <h1>Đăng Ký Tài khoản<h1>
+                    <h1>Đăng ký tài khoản<h1>
                       <form method="POST" action="register.php">
                           <div class="form-group">
                               <label>Tên user</label>
@@ -181,7 +160,6 @@
                       <div class="col-md-4"></div>
                   </div>
               </div>
-
 					</div>
 	            </div>
         	</div>
@@ -189,21 +167,16 @@
         <!-- /.row -->
     </div>
     <!-- end Page Content -->
-
     <!-- Footer -->
     <hr>
     <!-- Footer -->
 <footer class="page-footer font-small blue pt-4" style="text-align: center;     background: #222222; color: while">
-
     <!-- Footer Links -->
     <div class="container-fluid text-center text-md-center">
-
       <!-- Grid row -->
       <div class="row">
-
         <!-- Grid column -->
         <div class="col-md-6 mt-md-0 mt-3">
-
           <!-- Content -->
           <h5 class="text-uppercase">BÁN SÁCH</h5>
           <a href="">
@@ -211,10 +184,8 @@
             </a>
         </div>
         <!-- Grid column -->
-
       </div>
       <!-- Grid row -->
-
     </div>
     <!-- Footer Links -->
 
@@ -223,7 +194,6 @@
       <a href="https://mdbootstrap.com/education/bootstrap/"> admin.com</a>
     </div>
     <!-- Copyright -->
-
   </footer>
   <!-- Footer -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
