@@ -30,7 +30,20 @@ if(isset($_POST["submit"])){
     ?>
 
     <?php include_once("header.php"); ?>
-
+    <?php 
+    if(isset($_GET["inserted"])){
+        echo "<script>alert('Thêm thể loại truyện thành công')</script>";
+        // echo '<script>location.replace("ManagerUser.php");</script>';
+    }
+    if(isset($_GET["deleted"])){
+        echo "<script>alert('Xóa thể loại truyện thành công')</script>";
+        // echo '<script>location.replace("ManagerUser.php");</script>';
+    }
+    if(isset($_GET["updated"])){
+        echo "<script>alert('Cập nhật thể loại truyện thành công')</script>";
+        // echo '<script>location.replace("ManagerUser.php");</script>';
+    }
+?>
 
 
 
