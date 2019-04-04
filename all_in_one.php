@@ -66,15 +66,12 @@
 <?php include_once("header.php"); ?>
 
 <script>
-function myFunction(){
-var del=confirm("Bạn có muốn xóa không?");
-if (del==true){
-   alert ("Đã xóa.")
-}else{
-    window.location.href = 'all_in_one.php?failure';
-}
-return del;
-}
+  function myFunction(id) {
+      var r=confirm("Bạn có muốn xóa?");
+      if (r == true) {
+          window.location.href="all_in_one_category.php?delete=true&CateID="+id;
+      }
+  }
 </script>
 
 <?php
@@ -244,7 +241,7 @@ return del;
     				<td>".number_format($item["Price"])."</td>
     				<td><img src='uploads/".$item["Picture"]."' style='width:100px;height:100px'/></td>
     				<td><a class='btn btn-warning' href='all_in_one.php?edit=true&ProductID=".$item["ProductID"]."'>Sửa</a></td>
-    				<td><a onclick='myFunction();' class='btn btn-danger' href='all_in_one.php?delete=true&ProductID=".$item["ProductID"]."'>Xóa</a></td>
+    				<td><a onclick='myFunction(".$item["ProductID"].");' class='btn btn-danger' >Xóa</a></td>
     			</tr>";
 
         }
