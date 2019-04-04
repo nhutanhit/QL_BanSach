@@ -106,6 +106,7 @@ if(isset($_POST["submit"])){
 
                     <?php
                     $cates = Category::list_category();
+                    rsort($cates);
                     require_once('config/db.class.php');
                     ?>
                     <div class="col-sm-12">
