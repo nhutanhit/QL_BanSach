@@ -71,15 +71,15 @@
 <?php 
     if(isset($_GET["inserted"])){
         echo "<script>alert('Thêm user thành công')</script>";
-        echo '<script>location.replace("ManagerUser.php");</script>';
+        // echo '<script>location.replace("ManagerUser.php");</script>';
     }
     if(isset($_GET["deleted"])){
         echo "<script>alert('Xóa user thành công')</script>";
-        echo '<script>location.replace("ManagerUser.php");</script>';
+        // echo '<script>location.replace("ManagerUser.php");</script>';
     }
     if(isset($_GET["updated"])){
         echo "<script>alert('Cập nhật user thành công')</script>";
-        echo '<script>location.replace("ManagerUser.php");</script>';
+        // echo '<script>location.replace("ManagerUser.php");</script>';
     }
 ?>
 
@@ -96,81 +96,81 @@
         <div class="col-md-4">
             <h1>Quản lý User</h1>
             <form method="post">
-                    <div class="form-group">
-                        <label>Tên user</label>
-                        <input type="text" class="form-control" name="txtName" value="<?php echo isset($data['FullName']) ? $data['FullName'] : '' ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tài khoản</label>
-                        <input type="text" class="form-control" name="txtUsername" value="<?php echo isset($data['Username']) ? $data['Username'] : '' ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Mật khẩu</label>
-                        <input type="text" class="form-control" name="txtPassword" value="<?php echo isset($data['Password']) ? $data['Password'] : '' ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Địa chỉ</label>
-                        <input type="text" class="form-control" name="txtAddress" value="<?php echo isset($data['Address']) ? $data['Address'] : '' ?>"required>
-                    </div>
-                    <div class="form-group">
-                        <label>SĐT</label>
-                        <input type="text" class="form-control" name="txtPhone" value="<?php echo isset($data['Phone']) ? $data['Phone'] : '' ?>"required>
-                    </div>
-                    <div class="form-group">
-                        <label>Quyền</label>
-                        <input type="text" class="form-control" name="txtRole" value="<?php echo isset($data['Role']) ? $data['Role'] : '' ?>"required>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa user">
-                    </div>
+                <div class="form-group">
+                    <label>Tên user</label>
+                    <input type="text" class="form-control" name="txtName" value="<?php echo isset($data['FullName']) ? $data['FullName'] : '' ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Tài khoản</label>
+                    <input type="text" class="form-control" name="txtUsername" value="<?php echo isset($data['Username']) ? $data['Username'] : '' ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="text" class="form-control" name="txtPassword" value="<?php echo isset($data['Password']) ? $data['Password'] : '' ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" class="form-control" name="txtAddress" value="<?php echo isset($data['Address']) ? $data['Address'] : '' ?>"required>
+                </div>
+                <div class="form-group">
+                    <label>SĐT</label>
+                    <input type="text" class="form-control" name="txtPhone" value="<?php echo isset($data['Phone']) ? $data['Phone'] : '' ?>"required>
+                </div>
+                <div class="form-group">
+                    <label>Quyền</label>
+                    <input type="text" class="form-control" name="txtRole" value="<?php echo isset($data['Role']) ? $data['Role'] : '' ?>"required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa user">
+                </div>
             </form> 
-        <a class="btn btn-primary ml-2" href="ManagerUser.php">Back</a>
-            </div>
-            <div class="col-md-4"></div>
+            <a class="btn btn-primary ml-2" href="ManagerUser.php">Back</a>
+        </div>
+        <div class="col-md-4"></div>
         </div>
     </div>
      <?php      
     }}else {?>
     <div class="container">
-    <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <form method="POST" action="ManagerUser.php">
-            <h1>Quản lý User</h1>
-            <div class="form-group">
-                <label>Tên user</label>
-                <input type="text" class="form-control" name="txtName" value="<?php echo !empty($_POST['txtName']) ? $_POST['txtName'] : ''; ?>" required>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <form method="POST" action="ManagerUser.php">
+                    <h1>Quản lý User</h1>
+                    <div class="form-group">
+                        <label>Tên user</label>
+                        <input type="text" class="form-control" name="txtName" value="<?php echo !empty($_POST['txtName']) ? $_POST['txtName'] : ''; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tài khoản</label>
+                        <input type="text" class="form-control" name="txtUsername" value="<?php echo !empty($_POST['txtUsername']) ? $_POST['txtUsername'] : ''; ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input type="text" name="txtPassword" class="form-control" value="<?php echo !empty($_POST['txtPassword']) ? $_POST['txtPassword'] : '' ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" name="txtAddress" class="form-control" value="<?php echo !empty($_POST['txtAddress']) ? $_POST['txtAddress'] : '' ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label>SĐT</label>
+                        <input type="text" name="txtPhone" class="form-control" value="<?php echo !empty($_POST['txtPhone']) ? $_POST['txtPhone'] : '' ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Quyền</label>
+                        <input type="text" name="txtRole" class="form-control" value="<?php echo !empty($_POST['txtRole']) ? $_POST['txtRole'] : '' ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Thêm User">
+                    </div>
+                </form>
+                
+                <a class="btn btn-primary ml-2" href="ManagerUser.php">Add</a>
             </div>
-            <div class="form-group">
-                <label>Tài khoản</label>
-                <input type="text" class="form-control" name="txtUsername" value="<?php echo !empty($_POST['txtUsername']) ? $_POST['txtUsername'] : ''; ?>" required>
-            </div>
-            <div class="form-group">
-                <label>Mật khẩu</label>
-                <input type="text" name="txtPassword" class="form-control" value="<?php echo !empty($_POST['txtPassword']) ? $_POST['txtPassword'] : '' ?>" required>
-            </div>
-            <div class="form-group">
-                <label>Địa chỉ</label>
-                <input type="text" name="txtAddress" class="form-control" value="<?php echo !empty($_POST['txtAddress']) ? $_POST['txtAddress'] : '' ?>" required>
-            </div>
-            <div class="form-group">
-                <label>SĐT</label>
-                <input type="text" name="txtPhone" class="form-control" value="<?php echo !empty($_POST['txtPhone']) ? $_POST['txtPhone'] : '' ?>" required>
-            </div>
-            <div class="form-group">
-                <label>Quyền</label>
-                <input type="text" name="txtRole" class="form-control" value="<?php echo !empty($_POST['txtRole']) ? $_POST['txtRole'] : '' ?>" required>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-primary" type="submit" name="submit" value="Thêm User">
-            </div>
-        </form>
-        
-        <a class="btn btn-primary ml-2" href="ManagerUser.php">Add</a>
+            <div class="col-md-4"></div>
         </div>
-        <div class="col-md-4"></div>
     </div>
-</div>
     <?php 
     }
      ?>
@@ -179,7 +179,8 @@
 ?>
 
 <?php 
-	$users = user::list_user();
+    $users = user::list_user();
+    rsort($users);
 	require_once('config/db.class.php');
 ?>
 <table class="table table-bordered mt-3"> 
@@ -196,9 +197,23 @@
 		</tr>
 	</thead>
 <?php
+    $i = 1;
     foreach($users as $user){
-		$id = $user["UserID"];
+        $id = $user["UserID"];
+        if($i == 1 && isset($_GET['inserted'])){
 			echo "
+			<tr style='background-color: #1ec908'>
+				<td>".$user["UserID"]."</td>
+                <td>".$user["Username"]."</td>
+                <td>".$user["Password"]."</td>
+				<td>".$user["Address"]."</td>
+                <td>".$user["Phone"]."</td>
+                <td>".$user["Role"]."</td>
+                <td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
+                <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>
+            </tr>";
+        } else {
+            echo "
 			<tr>
 				<td>".$user["UserID"]."</td>
                 <td>".$user["Username"]."</td>
@@ -208,7 +223,9 @@
                 <td>".$user["Role"]."</td>
                 <td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
                 <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>
-			</tr>";
+            </tr>";
+        }
+        $i++;
     }
 ?>
 </table>
