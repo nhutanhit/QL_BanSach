@@ -21,7 +21,6 @@
     th,td{
     border-top:1px solid gray;
     border-bottom: 1px solid gray;
-
     padding:1px;
     text-align: center;
     }
@@ -37,6 +36,7 @@
 
     tr:hover {
         background-color: yellow;
+        text-align: center;
     }
     h2{
         color: red;
@@ -49,6 +49,9 @@
     }
     label{
       font-weight: bold;
+    }
+    .table .thead-dark th{
+      text-align: center !important;
     }
     </style>
 </head>
