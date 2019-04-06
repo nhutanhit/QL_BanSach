@@ -290,6 +290,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
       <input type="text" id="login" class="fadeIn second" name="username" required placeholder="login" value="<?php echo isset($_POST['username'])? $_POST['username']:''?>">
       <input type="password" id="password" class="fadeIn third" name="password" required placeholder="password" value="<?php echo isset($_POST['password'])? $_POST['password']:''?>">
       <input type="submit" name="login" class="fadeIn fourth" value="Log In">
+      <!-- <p style="color:red;">Đăng nhập hệ thống quản trị</p> -->
       </a>
     </form>
 
@@ -299,15 +300,28 @@ input[type=text]:placeholder, input[type=password]:placeholder {
       if(isset($_POST['username']) && isset($_POST['password'])){
         $datas = User::login($_POST['username'],$_POST['password']);
         $user = $datas->fetch_array(MYSQLI_ASSOC);
-          if($user['Username'] != null){
-            $_SESSION["logged"] = $user['Role'];
-            echo "<script>window.location.href = 'all_in_one.php'; </script>";
-            // echo $_SESSION["logged"] ;
+      
+          if($user['Username'] != null){ 
+              // anh: kiểm tra phê duyệt 
+             if($user['Status'] == 0){
+               echo "<script>alert ('Xin lỗi! tài khoản này chưa được quản trị viên phê duyệt.Vui lòng liên hệ quản trị viên để được hỗ trợ');</script>";
+               echo "<script>window.location.href = 'login.php'; </script>";
+            } else{
+              $_SESSION["fullname"] = $user['FullName'];
+              $_SESSION["logged"] = $user['Role']; 
+              $_SESSION["userid"] = $user['UserID']; 
+              if($user['Role'] == 'admin' || $user['Role'] =='user'){
+                echo "<script>window.location.href = 'all_in_one.php'; </script>";
+              }else{
+                echo "<script>window.location.href = 'index.php'; </script>";
+              }
+            } 
+            
           }
           else{
             echo "Tài khoản và mật khẩu không chính xác";
           }
-        // }
+         
       }
     }
     ?>
@@ -315,6 +329,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
     <div id="formFooter">
       <a class="underlineHover" href="register.php">Đăng ký</a>
     </div>
+    
 
   </div>
 </div>

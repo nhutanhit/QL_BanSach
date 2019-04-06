@@ -106,9 +106,10 @@
                       $password = $_POST["txtPassword"];
                       $address = $_POST["txtAddress"];
                       $phone = $_POST["txtPhone"];
-                      $role = "user";
+                      $role = "enduser";
+                      $Status = 0;
 
-                      $newUser = new User($fullname, $username, $password, $address, $phone, $role);
+                      $newUser = new User($fullname, $username, $password, $address, $phone, $role, $Status);
 
                       $result = $newUser->save();
                       if($result){

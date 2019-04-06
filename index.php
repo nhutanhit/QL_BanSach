@@ -8,7 +8,7 @@
         </li>
     </ul>
 <?php include_once("footer.php") ?> -->
-
+<?php session_start()?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,21 +89,24 @@
 			    </form>
 
 			    <ul class="nav navbar-nav pull-right">
+                   <?php if(isset($_SESSION["fullname"])){  
+                    echo " 
                     <li>
-                        <a href="register.php">Đăng ký</a>
-                    </li>
-                    <li>
-                        <a href="login.php">Đăng nhập</a>
-                    </li>
-                    <li>
-                    	<a>
-                    		<span class ="glyphicon glyphicon-user"></span>
-                    		Bùi Đức Phú
+                    	<a>  
+                            <span class ='glyphicon glyphicon-user'></span>".$_SESSION["fullname"]." 
                     	</a>
-                    </li>
-
+                    </li>";
+                     } else {
+                        echo "
+                        <li>
+                            <a href='register.php'>Đăng ký</a>
+                        </li>
+                        <li>
+                            <a href='login.php'>Đăng nhập</a>
+                        </li>";
+                     } ?> 
                     <li>
-                    	<a href="#">Đăng xuất</a>
+                    	<a onclick="userlogout()">Đăng xuất</a>
                     </li>
 
                 </ul>
@@ -116,6 +119,15 @@
         <!-- /.container -->
     </nav>
 
+<script>
+    function userlogout() {
+        var r = confirm("Bạn có muốn thoát!");
+        if (r == true) { 
+            unset($_SESSION['fullname']); 
+            window.location.href = "index.php";
+        }
+    }
+</script>
     <!-- Page Content -->
     <div class="container">
 
@@ -266,7 +278,10 @@
           <h5 class="text-uppercase">BÁN SÁCH</h5>
           <a href="">
           <p>Anh.Trần | Minh Mẫn | Anh Kiệt | An Khang | Vũ Khanh</p>
-            </a>
+         </a>
+          <a href="login.php">
+          <p>@Admin</p>
+         </a>
         </div>
         <!-- Grid column -->
 
@@ -277,9 +292,9 @@
     <!-- Footer Links -->
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2018 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/"> admin.com</a>
+    <div class="footer-copyright text-center py-3">© 2018 Copyright: 
     </div>
+
     <!-- Copyright -->
 
   </footer>

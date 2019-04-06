@@ -1,4 +1,7 @@
 <?php session_start()?>
+<?php if($_SESSION["logged"] != 'admin' &&  $_SESSION["logged"] == 'user'){ ?>
+         echo "<script>window.location.href = 'all_in_one.php'; </script>";
+<?php } ?>
 <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -223,6 +226,7 @@
 		    <th>Quyền</th>
 			<th>Sửa</th>
 			<th>Xóa</th>
+            <th>Trạng thái</th>
 		</tr>
 	</thead>
 <?php
@@ -230,6 +234,7 @@
     foreach($users as $user){
         $id = $user["UserID"];
         if($i == 1 && isset($_GET['inserted'])){
+            
 			echo "
 			<tr style='background-color: #1ec908'>
                 <td>".$user["UserID"]."</td>
@@ -240,8 +245,14 @@
                 <td>".$user["Phone"]."</td>
                 <td>".$user["Role"]."</td>
                 <td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
-                <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>
-            </tr>";
+                <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>";
+                if ($user["Status"] == 1 ){
+                    $stat = 'đã duyệt'; 
+                    echo "<td style='color: #155ab3;'>".$stat."</td>";}
+                    else{
+                        echo "<td><button class='btn btn-danger' onclick='verify(".$user["UserID"].")'>Duyệt</button></td>";
+                    }
+            echo "</tr>";
         } else {
             echo "
 			<tr>
@@ -253,8 +264,14 @@
                 <td>".$user["Phone"]."</td>
                 <td>".$user["Role"]."</td>
                 <td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
-                <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>
-            </tr>";
+                <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>";
+                if ($user["Status"] == 1 ){
+                   $stat = 'đã duyệt'; 
+                      echo "<td style='color: #155ab3;'>".$stat."</td>";}
+                    else{
+                        echo "<td><button class='btn btn-danger' onclick='verify(".$user["UserID"].")'>Duyệt</button></td>";
+                    }
+            echo "</tr>";
         }
         $i++;
     }
@@ -267,8 +284,16 @@
             window.location.href = "ManagerUser.php?delete=true&UserID="+id;
         }
     }
+    // Duyet
+     function verify(id) {
+        var r = confirm("Bạn có muốn duyệt tài khoản này!");
+        if (r == true) {
+            window.location.href = "ManagerUser.php?verify=true&UserID="+id;
+        }
+    }
 </script>
 <?php
+
 if(isset($_GET['delete'])){
     require_once("Entities/user.class.php");
 
@@ -281,6 +306,20 @@ if(isset($_GET['delete'])){
         echo "<script>window.location.href = 'ManagerUser.php?deleted'; </script>";
     }
 }
+
+// duyệt 
+if(isset($_GET['verify'])){
+    require_once("Entities/user.class.php");
+
+    $users = User::get_user($_GET['UserID']); 
+    $result = User::verify($_GET['UserID']);
+    if(!$result){
+        echo "<script>window.location.href = 'ManagerUser.php?verifyfailure'; </script>";
+    }else{
+        echo "<script>window.location.href = 'ManagerUser.php?verifysuccess'; </script>";
+    }
+}
+
 if (isset($_POST['btnsubmit']))
 if(isset($_GET['edit']))
 {

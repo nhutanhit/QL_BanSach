@@ -1,4 +1,7 @@
 <?php session_start()?>
+ <?php if($_SESSION["logged"] == 'enduser'){ ?>
+         echo "<script>window.location.href = 'index.php'; </script>";
+    <?php } ?>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -9,7 +12,7 @@
     <script src="js/demo/datatables-demo.js"></script>
     <script src="js/demo/chart-area-demo.js"></script>
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="index.php">Quản trị viên</a>
+    <a class="navbar-brand mr-1" href="index.php">Home</a>
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
@@ -37,7 +40,8 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý tài khoản</span></a>
         </li>
-<?php } ?>
+    <?php } ?>
+      <?php if($_SESSION["logged"] == 'admin' || $_SESSION["logged"] == 'user'){ ?>
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -48,11 +52,13 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
         </li> 
+
         <li class="nav-item active">
           <a class="nav-link" onclick="logout()" href="#">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Đăng xuất </span></a>
         </li> 
+     <?php } ?>
       </ul>
 
 
