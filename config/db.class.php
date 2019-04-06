@@ -7,10 +7,10 @@
     <title>Document</title>
     </head>
 <body>
-    
 
 
-<?php 
+
+<?php
 
 class Db
 {
