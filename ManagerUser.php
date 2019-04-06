@@ -1,7 +1,9 @@
+ 
 <?php session_start()?>
 <?php if($_SESSION["logged"] != 'admin' &&  $_SESSION["logged"] == 'user'){ ?>
          echo "<script>window.location.href = 'all_in_one.php'; </script>";
 <?php } ?>
+ 
 <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -30,47 +32,32 @@
       </div>
     </form>
   </nav>
-
+<script type="text/javascript" src="js/noel.js"></script>
   <div id="wrapper">
    <ul class="sidebar navbar-nav">
-   <?php if($_SESSION["logged"] == 'admin'){ ?>
         <li class="nav-item active">
           <a class="nav-link" href="ManagerUser.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý tài khoản</span></a>
         </li>
-<?php } ?>
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý truyện </span></a>
         </li>
- 
+
          <li class="nav-item active">
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
-        </li> 
-        <li class="nav-item active">
-          <a class="nav-link" onclick="logout()" href="#">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Đăng xuất </span></a>
-        </li> 
+        </li>
       </ul>
 
 
-<script>
-    function logout() {
-        var r = confirm("Bạn có muốn thoát!");
-        if (r == true) {
-            window.location.href = "login.php";
-        }
-    }
-</script>
-<?php 
+<?php
     require_once("Entities/user.class.php");
     if(isset($_POST["submit"])){
-        
+
         $fullname = $_POST["txtName"];
         $username = $_POST["txtUsername"];
         $password = $_POST["txtPassword"];
@@ -79,7 +66,7 @@
         $role =  $_POST["txtRole"];
 
         $newUser = new User($fullname, $username, $password, $address, $phone, $role);
-        
+
         $result = $newUser->save();
         if($result){
             header("Location: ManagerUser.php?inserted");
@@ -88,11 +75,11 @@
         }} else {
 
         }
-    
+
 ?>
 <?php include_once("header.php"); ?>
 
-<?php 
+<?php
     if(isset($_GET["inserted"])){
         echo "<script>alert('Thêm user thành công')</script>";
         // echo '<script>location.replace("ManagerUser.php");</script>';
@@ -107,7 +94,7 @@
     }
 ?>
 
-<?php 
+<?php
     require_once('config/db.class.php');
     if(isset($_GET['edit'])){
     $id = isset($_GET['UserID']) ? (int)$_GET['UserID'] : '';
@@ -118,7 +105,7 @@
         <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <h1>Quản lý admin</h1>
+            <h1>Quản lý User</h1>
             <form method="post">
                 <div class="form-group">
                     <label>Tên user</label>
@@ -142,21 +129,18 @@
                 </div>
                 <div class="form-group">
                     <label>Quyền</label>
-                    <select  class="form-control" name="txtRole">
-                        <option value="user">user</option>
-                        <option value="admin">admin</option>
-                    </select>
+                    <input type="text" class="form-control" name="txtRole" value="<?php echo isset($data['Role']) ? $data['Role'] : '' ?>"required>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa user">
                 </div>
-            </form> 
+            </form>
             <a class="btn btn-primary ml-2" href="ManagerUser.php">Back</a>
         </div>
         <div class="col-md-4"></div>
         </div>
     </div>
-     <?php      
+     <?php
     }}else {?>
     <div class="container">
         <div class="row">
@@ -186,38 +170,33 @@
                     </div>
                     <div class="form-group">
                         <label>Quyền</label>
-                        <select class="form-control" name="txtRole">
-                            <option value="user">user</option>
-                            <option value="admin">admin</option>
-                        </select>                    
+                        <input type="text" name="txtRole" class="form-control" value="<?php echo !empty($_POST['txtRole']) ? $_POST['txtRole'] : '' ?>" required>
                     </div>
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" name="submit" value="Thêm User">
                     </div>
                 </form>
-                
+
                 <a class="btn btn-primary ml-2" href="ManagerUser.php">Add</a>
             </div>
             <div class="col-md-4"></div>
         </div>
     </div>
-    <?php 
+    <?php
     }
      ?>
-<?php 
+<?php
     require_once("Entities/user.class.php");
 ?>
 
-<?php 
+<?php
     $users = user::list_user();
     rsort($users);
 	require_once('config/db.class.php');
 ?>
-
-<table class="table table-bordered mt-3"> 
+<table class="table table-bordered mt-3">
 	<thead class="thead-dark">
  		<tr>
- 			<th>ID</th>
  			<th>Tên user</th>
 		    <th>Tài khoản</th>
 		    <th>Mật khẩu</th>
@@ -237,8 +216,7 @@
             
 			echo "
 			<tr style='background-color: #1ec908'>
-                <td>".$user["UserID"]."</td>
-                <td>".$user["FullName"]."</td>
+				<td>".$user["UserID"]."</td>
                 <td>".$user["Username"]."</td>
                 <td>".$user["Password"]."</td>
 				<td>".$user["Address"]."</td>
@@ -257,7 +235,6 @@
             echo "
 			<tr>
 				<td>".$user["UserID"]."</td>
-                <td>".$user["FullName"]."</td>
                 <td>".$user["Username"]."</td>
                 <td>".$user["Password"]."</td>
 				<td>".$user["Address"]."</td>
@@ -334,7 +311,7 @@ if(isset($_GET['edit']))
     $result = $newUser->update($_GET['UserID']);
 
     if($result){
-        
+
         echo "<script>window.location.href = 'ManagerUser.php?updated'; </script>";
     }else{
         echo "<script>window.location.href = 'ManagerUser.php?failure'; </script>";

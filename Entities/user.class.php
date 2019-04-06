@@ -14,7 +14,7 @@ class User
     public function __construct($fullname, $username, $password, $address, $phone, $role, $status){
         $this->FullName = $fullname;
         $this->Username = $username;
-        $this->Password = md5($password);
+        $this->Password = $password;
         $this->Address = $address;
         $this->Phone = $phone;
         $this->Role = $role;
@@ -67,7 +67,7 @@ class User
 
     public function login($user,$pass){
         $db = new Db();
-        $sql = "SELECT * FROM user where Username ='".$user."' and Password ='".md5($pass)."'"  ;
+        $sql = "SELECT * FROM user where Username ='".$user."' and Password ='".md5($pass)."'"  ;  
         $result = $db->query_execute($sql);
         return $result;
     }

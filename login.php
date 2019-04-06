@@ -300,6 +300,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
       if(isset($_POST['username']) && isset($_POST['password'])){
         $datas = User::login($_POST['username'],$_POST['password']);
         $user = $datas->fetch_array(MYSQLI_ASSOC);
+
       
           if($user['Username'] != null){ 
               // anh: kiểm tra phê duyệt 
@@ -317,6 +318,11 @@ input[type=text]:placeholder, input[type=password]:placeholder {
               }
             } 
             
+
+          if($user['Username'] != null){
+            $_SESSION["logged"] = $user['Role'];
+            echo "<script>window.location.href = 'all_in_one.php'; </script>";
+
           }
           else{
             echo "Tài khoản và mật khẩu không chính xác";

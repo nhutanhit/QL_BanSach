@@ -1,7 +1,9 @@
+
 <?php session_start()?>
  <?php if($_SESSION["logged"] == 'enduser'){ ?>
          echo "<script>window.location.href = 'index.php'; </script>";
     <?php } ?>
+
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -34,23 +36,27 @@
   <div id="wrapper">
 
     <ul class="sidebar navbar-nav">
-    <?php if($_SESSION["logged"] == 'admin'){ ?>
         <li class="nav-item active">
           <a class="nav-link" href="ManagerUser.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý tài khoản</span></a>
         </li>
+<<<<<<< HEAD
     <?php } ?>
       <?php if($_SESSION["logged"] == 'admin' || $_SESSION["logged"] == 'user'){ ?>
+=======
+>>>>>>> AKT
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý truyện </span></a>
         </li>
-        <li class="nav-item active">
+
+         <li class="nav-item active">
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
+<<<<<<< HEAD
         </li> 
 
         <li class="nav-item active">
@@ -59,17 +65,10 @@
             <span>Đăng xuất </span></a>
         </li> 
      <?php } ?>
+=======
+        </li>
+>>>>>>> AKT
       </ul>
-
-
-<script>
-    function logout() {
-        var r = confirm("Bạn có muốn thoát!");
-        if (r == true) {
-            window.location.href = "login.php";
-        }
-    }
-</script>
 
 <?php
     require_once("Entities/product.class.php");
