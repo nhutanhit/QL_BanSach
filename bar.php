@@ -14,7 +14,7 @@
 </nav>
 
 <div id="wrapper">
-    <ul class="sidebar navbar-nav"> 
+    <ul class="sidebar navbar-nav">
         <li class="nav-item active">
           <a class="nav-link" href="ManagerUser.php">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -25,11 +25,16 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý truyện </span></a>
         </li>
- 
+
          <li class="nav-item active">
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
-        </li> 
+        </li>
+        <li class="nav-item active">
+         <a class="nav-link" href="ListDetail.php">
+           <i class="fas fa-fw fa-chart-area"></i>
+           <span>Quản lý đơn hàng </span></a>
+       </li>
       </ul>
 </ul>
