@@ -330,6 +330,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
          
       }
     }
+  }
     ?>
     <!-- Remind Passowrd -->
     <div id="formFooter">

@@ -41,11 +41,9 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý tài khoản</span></a>
         </li>
-<<<<<<< HEAD
-    <?php } ?>
+ 
       <?php if($_SESSION["logged"] == 'admin' || $_SESSION["logged"] == 'user'){ ?>
-=======
->>>>>>> AKT
+ 
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -56,7 +54,7 @@
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
-<<<<<<< HEAD
+ 
         </li> 
 
         <li class="nav-item active">
@@ -65,9 +63,9 @@
             <span>Đăng xuất </span></a>
         </li> 
      <?php } ?>
-=======
+
         </li>
->>>>>>> AKT
+
       </ul>
 
 <?php
