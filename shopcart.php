@@ -8,8 +8,12 @@
 <script src="js/demo/datatables-demo.js"></script>
 <script src="js/demo/chart-area-demo.js"></script>
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+<div class="col-md-6">
+<a class="navbar-brand mr-1" href="index.php">Home</a>
 <a class="navbar-brand mr-1" href="shopcart.php">Giỏ hàng</a>
+</div>
 <!-- Navbar Search -->
+<script type="text/javascript" src="js/noel.js"></script>
 <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
   <div class="input-group">
     <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
@@ -21,8 +25,9 @@
   </div>
 </form>
 </nav
-<script type="text/javascript" src="js/noel.js"></script>
+
 <?php include_once("header.php") ?><br>
+
 <div class="col-md-12" style="margin-top: 100px">
 <center><div class="col-sm-8">
 <h1>Giỏ hàng</h1>
@@ -45,7 +50,7 @@
   		    <th>Địt</th>
   		    <th>1đ</th>
   		    <td><img src='uploads/".$item["Picture"]."' style='width:100px;height:100px'/></td>
-          <td><a class='btn btn-warning' href='all_in_one.php?edit=true&ProductID=".$item["ProductID"]."'>Cập nhật</a></td>
+          <td><a class='btn btn-warning' href="#">Cập nhật</a></td>
     			<td><a onclick='myFunction(".$item["ProductID"].");' class='btn btn-danger' >Xóa</a></td>
   		</tr>
   </table>
