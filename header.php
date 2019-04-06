@@ -11,28 +11,30 @@
     <style type="text/css">
     table{
     border-collapse: collapse;
- 
+
     width: 100%;
     height: 100%;
- 
+
     width: auto;
     height: auto;
- 
     }
     th,td{
     border-top:1px solid gray;
     border-bottom: 1px solid gray;
- 
+
     padding:1px;
     text-align: center;
     }
+    table#t01 {
+      margin: auto;
+  }
    /* tr:nth-child(odd){
     background-color: #ddd;
     }
  */
     text-align: center;
     }
- 
+
     tr:hover {
         background-color: yellow;
     }
@@ -40,9 +42,9 @@
         color: red;
     }
     h1{
- 
+
         font-size: 33px;
- 
+
         font-weight: bold;
     }
     label{
