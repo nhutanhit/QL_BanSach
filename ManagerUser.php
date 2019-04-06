@@ -1,3 +1,4 @@
+<?php session_start()?>
 <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -28,12 +29,14 @@
   </nav>
 
   <div id="wrapper">
-   <ul class="sidebar navbar-nav"> 
+   <ul class="sidebar navbar-nav">
+   <?php if($_SESSION["logged"] == 'admin'){ ?>
         <li class="nav-item active">
           <a class="nav-link" href="ManagerUser.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý tài khoản</span></a>
         </li>
+<?php } ?>
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -45,9 +48,22 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
         </li> 
+        <li class="nav-item active">
+          <a class="nav-link" onclick="logout()" href="#">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Đăng xuất </span></a>
+        </li> 
       </ul>
 
 
+<script>
+    function logout() {
+        var r = confirm("Bạn có muốn thoát!");
+        if (r == true) {
+            window.location.href = "login.php";
+        }
+    }
+</script>
 <?php 
     require_once("Entities/user.class.php");
     if(isset($_POST["submit"])){
@@ -99,7 +115,7 @@
         <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <h1>Quản lý User</h1>
+            <h1>Quản lý admin</h1>
             <form method="post">
                 <div class="form-group">
                     <label>Tên user</label>
@@ -123,7 +139,10 @@
                 </div>
                 <div class="form-group">
                     <label>Quyền</label>
-                    <input type="text" class="form-control" name="txtRole" value="<?php echo isset($data['Role']) ? $data['Role'] : '' ?>"required>
+                    <select  class="form-control" name="txtRole">
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa user">
@@ -164,7 +183,10 @@
                     </div>
                     <div class="form-group">
                         <label>Quyền</label>
-                        <input type="text" name="txtRole" class="form-control" value="<?php echo !empty($_POST['txtRole']) ? $_POST['txtRole'] : '' ?>" required>
+                        <select class="form-control" name="txtRole">
+                            <option value="user">user</option>
+                            <option value="admin">admin</option>
+                        </select>                    
                     </div>
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" name="submit" value="Thêm User">
@@ -188,6 +210,7 @@
     rsort($users);
 	require_once('config/db.class.php');
 ?>
+
 <table class="table table-bordered mt-3"> 
 	<thead class="thead-dark">
  		<tr>

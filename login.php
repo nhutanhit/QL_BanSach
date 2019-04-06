@@ -302,6 +302,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
           if($user['Username'] != null){
             $_SESSION["logged"] = $user['Role'];
             echo "<script>window.location.href = 'all_in_one.php'; </script>";
+            // echo $_SESSION["logged"] ;
           }
           else{
             echo "Tài khoản và mật khẩu không chính xác";

@@ -1,3 +1,4 @@
+<?php session_start()?>
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
     <a class="navbar-brand mr-1" href="index.php">Admin</a>
     <!-- Navbar Search -->
@@ -15,21 +16,37 @@
 
 <div id="wrapper">
     <ul class="sidebar navbar-nav"> 
+    <?php if($_SESSION["logged"] == 'admin'){ ?>
         <li class="nav-item active">
           <a class="nav-link" href="ManagerUser.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý tài khoản</span></a>
         </li>
+<?php } ?>
         <li class="nav-item active">
           <a class="nav-link" href="all_in_one.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý truyện </span></a>
         </li>
  
-         <li class="nav-item active">
+        <li class="nav-item active">
           <a class="nav-link" href="all_in_one_category.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
         </li> 
+        <li class="nav-item active">
+          <a class="nav-link" onclick="logout()" href="#">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Đăng xuất </span></a>
+        </li> 
       </ul>
-</ul>
+
+
+<script>
+    function logout() {
+        var r = confirm("Bạn có muốn thoát!");
+        if (r == true) {
+            window.location.href = "login.php";
+        }
+    }
+</script>
