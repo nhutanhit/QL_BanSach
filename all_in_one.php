@@ -56,7 +56,11 @@
             <span>Quản lý thể loại truyện </span></a>
  
         </li> 
-
+         <li class="nav-item active">
+          <a class="nav-link"  href="ListDetail.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Quản lý đơn hàng </span></a>
+        </li> 
         <li class="nav-item active">
           <a class="nav-link" onclick="logout()" href="#">
             <i class="fas fa-fw fa-chart-area"></i>

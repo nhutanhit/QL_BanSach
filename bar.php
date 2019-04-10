@@ -36,5 +36,10 @@
            <i class="fas fa-fw fa-chart-area"></i>
            <span>Quản lý đơn hàng </span></a>
        </li>
+       <li class="nav-item active">
+          <a class="nav-link" onclick="logout()" href="#">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Đăng xuất </span></a>
+        </li>
       </ul>
 </ul>
