@@ -51,6 +51,16 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Quản lý thể loại truyện </span></a>
         </li>
+         <li class="nav-item active">
+         <a class="nav-link" href="ListDetail.php">
+           <i class="fas fa-fw fa-chart-area"></i>
+           <span>Quản lý đơn hàng </span></a>
+       </li>
+        <li class="nav-item active">
+          <a class="nav-link" onclick="logout()" href="#">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Đăng xuất </span></a>
+        </li>
       </ul>
 
 
@@ -203,8 +213,8 @@
 		    <th>Địa chỉ</th>
 		    <th>SĐT</th>
 		    <th>Quyền</th>
-			<th>Sửa</th>
-			<th>Xóa</th>
+			<th> </th>
+			<th> </th>
             <th>Trạng thái</th>
 		</tr>
 	</thead>
@@ -222,11 +232,19 @@
 				<td>".$user["Address"]."</td>
                 <td>".$user["Phone"]."</td>
                 <td>".$user["Role"]."</td>
-                <td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
-                <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>";
-                if ($user["Status"] == 1 ){
+ 
+
+                ";
+                if($user["Status"] !== 2 ){
+                    echo "<td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
+                          <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>";
+                }
+                else if ($user["Status"] == 1 ){
                     $stat = 'đã duyệt'; 
-                    echo "<td style='color: #155ab3;'>".$stat."</td>";}
+                    echo "<td style='color: #155ab3;'>".$stat."</td>";
+                }else if($user["Status"] == 2){
+                     echo "<td><button class='btn btn-danger' onclick='mokhoa(".$user["UserID"].")'>Mở Khóa</button></td>";
+                }
                     else{
                         echo "<td><button class='btn btn-danger' onclick='verify(".$user["UserID"].")'>Duyệt</button></td>";
                     }
@@ -240,11 +258,19 @@
 				<td>".$user["Address"]."</td>
                 <td>".$user["Phone"]."</td>
                 <td>".$user["Role"]."</td>
-                <td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
-                <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>";
+                 ";
+
+                if($user["Status"] != 2 ){
+                    echo "<td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
+                          <td><button class='btn btn-danger' onclick='myFunction(".$user["UserID"].")'>Xóa</button></td>";
+                }
+                
                 if ($user["Status"] == 1 ){
-                   $stat = 'đã duyệt'; 
-                      echo "<td style='color: #155ab3;'>".$stat."</td>";}
+                     $stat = 'đã duyệt'; 
+                      echo "<td style='color: #155ab3;'>".$stat."</td>";
+                  }else if($user["Status"] == 2){
+                     echo "<td><button class='btn btn-danger' onclick='mokhoa(".$user["UserID"].")'>Mở Khóa</button></td>";
+                }
                     else{
                         echo "<td><button class='btn btn-danger' onclick='verify(".$user["UserID"].")'>Duyệt</button></td>";
                     }
@@ -266,6 +292,13 @@
         var r = confirm("Bạn có muốn duyệt tài khoản này!");
         if (r == true) {
             window.location.href = "ManagerUser.php?verify=true&UserID="+id;
+        }
+    }
+    // mở khóa 
+    function mokhoa(id){
+        var r = confirm("Bạn có muốn mở khóa tài khoản này!");
+        if (r == true) {
+            window.location.href = "ManagerUser.php?mokhoa=true&UserID="+id;
         }
     }
 </script>
@@ -294,6 +327,20 @@ if(isset($_GET['verify'])){
         echo "<script>window.location.href = 'ManagerUser.php?verifyfailure'; </script>";
     }else{
         echo "<script>window.location.href = 'ManagerUser.php?verifysuccess'; </script>";
+    }
+}
+
+
+// mở khóa 
+if(isset($_GET['mokhoa'])){
+    require_once("Entities/user.class.php");
+
+    $users = User::get_user($_GET['UserID']); 
+    $result = User::verify($_GET['UserID']);
+    if(!$result){
+        echo "<script>window.location.href = 'ManagerUser.php?mokhoafailure'; </script>";
+    }else{
+        echo "<script>window.location.href = 'ManagerUser.php?mokhoasuccess'; </script>";
     }
 }
 
