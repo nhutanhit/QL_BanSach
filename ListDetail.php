@@ -1,5 +1,5 @@
 <?php session_start()?>
- <?php if($_SESSION["logged"] == 'user'){ ?>
+ <?php if($_SESSION["logged"] == 'enduser'){ ?>
          echo "<script>window.location.href = 'index.php'; </script>";
     <?php } ?>
 <?php include_once("bar.php") ?>

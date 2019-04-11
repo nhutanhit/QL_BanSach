@@ -1,5 +1,5 @@
 <?php session_start()?>
- <?php if($_SESSION["logged"] == 'user'){ ?>
+ <?php if($_SESSION["logged"] == 'enduser'){ ?>
          echo "<script>window.location.href = 'index.php'; </script>";
     <?php } ?>
 <?php include_once("bar.php") ?>
@@ -139,10 +139,25 @@ if(isset($_GET['KiemTraDonHang'])){
 if(isset($_GET['DuyetDonHang'])){
     require_once("Entities/orderProduct.class.php"); 
     $result = OrderProduct::capnhatDonHang($_GET['OrderID'],1);
+
+     $db = new Db();
+           // $sql =  "UPDATE orderproduct SET Status = ".$status." WHERE OrderID =".$id;
+            foreach($datas as $item){
+               $sltonkho = 0; $ProductID = 0; 
+               $sltonkho = $item["QuantitySP"] - $item["Quantity"]; 
+               $ProductID = $item["ProductID"]; 
+               $sql = "UPDATE product SET Quantity = ".$sltonkho." WHERE ProductID = ".$ProductID;
+               $result = $db->query_execute($sql);
+             }
+
     if(!$result){
         echo "<script>window.location.href = 'ListDetail.php?duyetfailure'; </script>";
     }else{
         echo "<script>window.location.href = 'ListDetail.php?duyetsuccess'; </script>";
+
+
+           
+
     }
 }
 // hủy 

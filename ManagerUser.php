@@ -62,7 +62,15 @@
             <span>Đăng xuất </span></a>
         </li>
       </ul>
-
+      
+<script type="text/javascript">
+   function logout(){
+      var r = confirm("Bạn có muốn đăng xuất!");
+        if (r == true) {
+            window.location.href = "login.php";
+        }
+   }
+ </script>
 
 <?php
     require_once("Entities/user.class.php");

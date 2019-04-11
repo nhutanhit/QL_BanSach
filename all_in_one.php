@@ -72,6 +72,15 @@
 
       </ul>
 
+ <script type="text/javascript">
+   function logout(){
+      var r = confirm("Bạn có muốn đăng xuất!");
+        if (r == true) {
+            window.location.href = "login.php";
+        }
+   }
+ </script>
+
 <?php
     require_once("Entities/product.class.php");
 
