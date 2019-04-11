@@ -21,10 +21,7 @@
 <script type="text/javascript" src="js/noel.js"></script>
 </head>
 <body>
-<?php
-     require_once("entities/product.class.php");
-     require_once("entities/slide.class.php");
-?>
+ 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -64,76 +61,99 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> 
 
     <div class="container">
     	<div class="row carousel-holder">
                 <div class="row main-left">
                     <div class="col-md-4"></div>
                       <div class="col-md-4" style="margin-top: 100px;">
-                          <form method="post" action="" >
+                          <form method="GET" action="#" >
                               <div class="form-group" >
                                 <label>Mã đơn hàng</label>
                                   <input type="text" class="form-control" name="txtMadonhang" autofocus value="<?php echo !empty($_POST['txtMadonhang']) ? $_POST['txtMadonhang'] : ''; ?>" required>
                               </div>
                               <div class="form-group" style="float:right">
-                                  <input class="btn btn-primary" type="submit" name="ok" value="search" required>
+                                  <input class="btn btn-primary" type="submit"  value="search" required>
                               </div>
                           </form>
                       </div>
                       <div class="col-md-4"></div>
-                      <?php
-                          require_once("Entities/orderProduct.class.php");
-                      ?>
-                      <?php
-                          if (isset($_REQUEST['ok']))
-                          {
-                            $button = isset($_GET['submit']) ? $_GET['submit'] : '';
-                              $search = isset($_GET['search']) ? $_GET['search'] : '';
-                            // $search = ($_GET['search']);
-                            // $search = addslashes($search);
-                            // $query = "select * from OrderID where orderdetail like '%$search%'";
-                            $con=mysqli_connect("localhost", "root", "", "ecommerce");
-                            // mysqli_connect("localhost", "root", "", "ecommerce");
-                            mysqli_query($con,"select * from OrderID where orderdetail like '%$search%'");
-                            // $sql = mysqli_query($query,"select * from OrderID where orderdetail like '%$search%'");
-                            $num = mysqli_num_rows($con,$result2);
-                            if ($num > 0 && $search != "")
-                            {
-                                 echo "
-                                       <tr style='background-color: #1ec908'>
-                                      <td>".$item["OrderID"]."</td>
-                                      <td>".$item["ProductID"]."</td>
-                                      <td>".$item["Quantty"]."</td>
-                                      </tr>";
-                              }
-                          }
-                      ?>
+                      
+                     
                   <div class="col-md-12">
                   <center>
                       <h1>Thông tin đơn hàng</h1>
                       <div class="row">
                         <table class="table table-bordered sm-3" style="width:100%">
                             <tr>
-                                <th>Product ID</th>
-                                <th>Product Name</th>
-                                <th>Product Type</th>
-                                <th>Price</th>
-                                <th>Picture</th>
+                                <th>STT</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Hình ảnh</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th> 
                             </tr>
+                               <?php
+
+                                // if (isset($_GET['submit']))
+                                //   { 
+                                          require_once('config/db.class.php');
+                                          $db = new Db();
+                                          $sql = "SELECT orderproduct.Status, product.ProductName, product.ProductID,product.Quantity as QuantitySP,product.Price, product.Picture, orderdetail.OrderID,orderdetail.Quantity FROM orderproduct,  orderdetail, product where orderproduct.OrderID = orderdetail.OrderID and product.ProductID =orderdetail.ProductID and orderproduct.OrderID = 1"; //.$search;
+                                          $result = $db->select_to_array($sql);
+                                         $SumQuantity = 0; 
+                                         $SumPrice = 0;
+
+                                      $i=1; 
+                                       foreach($result as $item){
+                                        $id = $item["OrderID"];
+                                          $SumQuantity += $item["Quantity"]; 
+                                          $SumPrice += $item["Price"]*$item["Quantity"]; 
+                                          $Status = $item["Status"]; 
+                                        echo "
+                                        <tr>
+                                          <td>".$i++."</td>
+                                          <td>".$item["ProductName"]."</td> 
+                                          <td><img width='200px' height='200px' class='img-responsive' src='uploads/".$item["Picture"]."'></td>  
+                                          <td>".$item["Quantity"]."</td>
+                                          <td> ".number_format($item["Price"]*$item["Quantity"], 0, '', ',') ."</td>
+                                           ";
+                                          
+                                          
+                                         
+                                          // echo "<td><a class='btn btn-warning' href='Orderdetail.php?OrderID=".$item["OrderID"]."'>Xem Chi Tiết</a></td>   </tr>";
+                                           
+                                          $i++;
+                                      }
+                                   // }
+                                ?> 
                         </table>
-                        <table id="t01" border="1" style="width:25%">
+                        <table id="t01" border="1" style="width:80%">
                         <tr>
-                          <th>Số lượng: </th>
-                          <th>?? </th>
+                          <th>Tồng Số lượng: </th>
+                          <th> <?php echo"$SumQuantity";?></th>
                             <th>Tổng tiền: </th>
-                            <th>??</th>
+                           <th><?php echo number_format($SumPrice, 0, '', ',');?> VNĐ</td>
+                            <th>Trạng thái: </th>
+                            <th>
+                              <?php
+                                   if($Status == 0 ){
+                                      echo "<td style='color: #28a745; '>Chờ xử lý</td>  ";
+                                    }
+                                    else  if($Status == 1 ){
+                                      echo "<td style='color: #ffc107; '>Đã duyệt</td>  ";
+                                    }
+                                     else  if($Status== 2 ){
+                                      echo "<td style='color: red; '>Không duyệt</td>  ";
+                                    } 
+                              ?>
+                            </th>
                         </tr>
                       </table>
                       </div>
-                      <div class="row" style="margin-top: 30px"></div>
+                     <!--  <div class="row" style="margin-top: 30px"></div>
                       <a class="btn btn-primary ml-2" href="#">Thanh toán</a>
-                      <a class="btn btn-primary ml-2" href="index.php">Quay lại</a>
+                      <a class="btn btn-primary ml-2" href="index.php">Quay lại</a> -->
                   </center>
                   </div>
         				</div>
