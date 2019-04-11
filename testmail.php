@@ -11,7 +11,7 @@ $message = '
 <html>
 <head>
 	<title>abc</title>
-	
+	<link rel="stylesheet" type="text/css" href="site.css">
 </head>
 <body>
 	<h1 align="center">Thông tin đặt hàng </h1>
@@ -34,7 +34,7 @@ $message = '
   		    <th>Mập</th>
   		    <th>Địt</th>
   		    <th>1đ</th>
-  		    <td style=" margin-right: -50px;"><img src="http://domain.com/absolute/path/to/image/uploads/1.pnj" style="width:100px;height:100px;"/></td>
+  		    <td><img class="img" src="http://domain.com/absolute/path/to/image/uploads/1.pnj" style="width:100px;height:100px;"/></td>
   		    <td>10</td>
   		    <td>100đ</td>
   		</tr>
