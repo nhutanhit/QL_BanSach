@@ -303,8 +303,13 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 
       
           if($user['Username'] != null){ 
+              // account bị xóa - khóa
+            if($user['Status'] == 2){
+               echo "<script>alert ('Xin lỗi! tài khoản này đã bị khóa.Vui lòng liên hệ quản trị viên để được hỗ trợ');</script>";
+               echo "<script>window.location.href = 'login.php'; </script>";
+            }
               // anh: kiểm tra phê duyệt 
-             if($user['Status'] == 0){
+            else if($user['Status'] == 0){
                echo "<script>alert ('Xin lỗi! tài khoản này chưa được quản trị viên phê duyệt.Vui lòng liên hệ quản trị viên để được hỗ trợ');</script>";
                echo "<script>window.location.href = 'login.php'; </script>";
             } else{

@@ -50,9 +50,18 @@ class OrderProduct
 
     public function get_orderproducr($id){
         $db = new Db();
-        $sql = "SELECT * FROM orderproduct where OrderID =".$id;
+        $sql = "SELECT product.ProductName, product.ProductID,product.Quantity as QuantitySP,product.Price, product.Picture, orderdetail.OrderID,orderdetail.Quantity FROM orderdetail, product where orderdetail.ProductID = product.ProductID and orderdetail.OrderID=".$id;
         $result = $db->query_execute($sql);
         return $result;
     }
+    // duyệt don hàng
+     public function capnhatDonHang($id, $status){
+        $db = new Db();
+        $sql =  "UPDATE orderproduct SET Status = ".$status." WHERE OrderID =".$id;
+        $result = $db->query_execute($sql);
+        return $result;
+    }
+    // kiểm tra đơn hàng 
+
 }
 ?>

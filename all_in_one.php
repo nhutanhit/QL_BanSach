@@ -56,7 +56,11 @@
             <span>Quản lý thể loại truyện </span></a>
  
         </li> 
-
+         <li class="nav-item active">
+          <a class="nav-link"  href="ListDetail.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Quản lý đơn hàng </span></a>
+        </li> 
         <li class="nav-item active">
           <a class="nav-link" onclick="logout()" href="#">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -67,6 +71,15 @@
         </li>
 
       </ul>
+
+ <script type="text/javascript">
+   function logout(){
+      var r = confirm("Bạn có muốn đăng xuất!");
+        if (r == true) {
+            window.location.href = "login.php";
+        }
+   }
+ </script>
 
 <?php
     require_once("Entities/product.class.php");

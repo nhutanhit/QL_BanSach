@@ -35,15 +35,23 @@ class User
         return $result;
     }
 
+    // Khóa tài khoản. 
     public function delete($id){
         $db = new Db();
-        $sql = "DELETE FROM user WHERE UserID = ".$id;
+        $sql = "UPDATE  user SET Status = 2 WHERE UserID = ".$id;
         // $result = $db->query_execute($sql);
         $query = mysqli_query($db->connect(), $sql);
         return $query;
     }
     // duyệt 
       public function verify($id){
+        $db = new Db();
+        $sql = "UPDATE user SET Status = 1 WHERE UserID =".$id;
+        $result = $db->query_execute($sql);
+        return $result;
+    }
+     // duyệt 
+      public function mokhoa($id){
         $db = new Db();
         $sql = "UPDATE user SET Status = 1 WHERE UserID =".$id;
         $result = $db->query_execute($sql);

@@ -36,5 +36,18 @@
            <i class="fas fa-fw fa-chart-area"></i>
            <span>Quản lý đơn hàng </span></a>
        </li>
+       <li class="nav-item active">
+          <a class="nav-link" onclick="logout()" href="#">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Đăng xuất </span></a>
+        </li>
       </ul>
 </ul>
+<script type="text/javascript">
+   function logout(){
+      var r = confirm("Bạn có muốn đăng xuất!");
+        if (r == true) {
+            window.location.href = "login.php";
+        }
+   }
+ </script>
