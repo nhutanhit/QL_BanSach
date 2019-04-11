@@ -14,7 +14,8 @@ $message = '
 	
 </head>
 <body>
-	<h1 alige="center">Thông tin đặt hàng </h1>
+	<h1 align="center">Thông tin đặt hàng </h1>
+
 <div class="row">
   <table class="table table-bordered sm-3" style="width:100%" >
   	<thead class="thead-dark">
@@ -33,7 +34,7 @@ $message = '
   		    <th>Mập</th>
   		    <th>Địt</th>
   		    <th>1đ</th>
-  		    <td><img src="http://domain.com/absolute/path/to/image/uploads/1.pnj" style="width:100px;height:100px"/></td>
+  		    <td style=" margin-right: -50px;"><img src="http://domain.com/absolute/path/to/image/uploads/1.pnj" style="width:100px;height:100px;"/></td>
   		    <td>10</td>
   		    <td>100đ</td>
   		</tr>
