@@ -79,5 +79,11 @@ class User
         $result = $db->query_execute($sql);
         return $result;
     }
+     public function Logout($userID){
+        $db = new Db();
+        $sql = "UPDATE  user SET loginstatus = 0 WHERE UserID =".$userID;
+        $result = $db->query_execute($sql);
+        return $result;
+    }
 }
 ?>

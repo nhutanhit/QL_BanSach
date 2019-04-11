@@ -316,11 +316,21 @@ input[type=text]:placeholder, input[type=password]:placeholder {
               $_SESSION["fullname"] = $user['FullName'];
               $_SESSION["logged"] = $user['Role']; 
               $_SESSION["userid"] = $user['UserID']; 
+
+               //Gọi hàm tăng số lượng truy cập
+              require_once('config/db.class.php');
+              $db = new Db();
+              $sql = "UPDATE user SET loginstatus = 1, countlogin = ".($user['countlogin']+1)." where UserID = ".$user['UserID'];
+              $db->query_execute($sql);
+
+
               if($user['Role'] == 'admin' || $user['Role'] =='user'){
                 echo "<script>window.location.href = 'all_in_one.php'; </script>";
               }else{
                 echo "<script>window.location.href = 'index.php'; </script>";
               }
+
+
             } 
             
 

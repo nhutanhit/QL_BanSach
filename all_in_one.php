@@ -62,7 +62,7 @@
             <span>Quản lý đơn hàng </span></a>
         </li> 
         <li class="nav-item active">
-          <a class="nav-link" onclick="logout()" href="#">
+          <a class="nav-link" onclick="userlogout()" href="#">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Đăng xuất </span></a>
         </li> 
@@ -72,14 +72,30 @@
 
       </ul>
 
- <script type="text/javascript">
-   function logout(){
-      var r = confirm("Bạn có muốn đăng xuất!");
-        if (r == true) {
-            window.location.href = "login.php";
+ <script>
+    function userlogout() {
+        var r = confirm("Bạn có muốn thoát!");
+        if (r == true) { 
+            //unset($_SESSION['fullname']); 
+            //window.location.href = "index.php";
+             window.location.href = "Index.php?Logout=true";
         }
-   }
- </script>
+    }
+</script>
+    <?php
+        // mở khóa 
+        if(isset($_GET['Logout'])){
+            require_once("Entities/user.class.php");  
+            $UserID =  $_SESSION["userid"];
+            $result = User::Logout($UserID);
+            if(!$result){
+                echo "<script>window.location.href = 'Login.php?'; </script>";
+            }else{
+                unset($_SESSION['fullname']); 
+                echo "<script>window.location.href = 'Login.php?'; </script>";
+            }
+        }
+    ?>
 
 <?php
     require_once("Entities/product.class.php");
