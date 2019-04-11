@@ -37,22 +37,29 @@
    			  <th>STT</th>
   		    <th>Tên sản phẩm</th>
           <th>Số lượng</th>
-          <th>Gía</th>
+          <th>Thành Tiền</th>
   		    <th>Hình ảnh</th>   
           <th></th>
   		</tr>
       <?php
         $i=1; 
+        $SumQuantity = 0; 
+         $SumPrice = 0;
          foreach($datas as $item){
           $id = $item["OrderID"];
+          $SumQuantity += $item["Quantity"]; 
+          $SumPrice += $item["Price"]*$item["Quantity"]; 
+
            {
           echo "
           <tr>
             <td>".$i++."</td>
             <td>".$item["ProductName"]."</td>
             <td>".$item["Quantity"]."</td>
-            <td>".$item["Price"]."</td>   
-            <td><img width='200px' height='200px' class='img-responsive' src='uploads/".$item["Picture"]."'></td>    ";
+            <td>" ;
+            echo  number_format($item["Price"]*$item["Quantity"])." VNĐ</td>  ";
+
+            echo "<td><img width='200px' height='200px' class='img-responsive' src='uploads/".$item["Picture"]."'></td>    ";
             // if($item["Status"] == 0 ){
             //   echo "<td style='color: #28a745; '>Chờ xử lý</td>  ";
             // }
@@ -63,12 +70,16 @@
             //   echo "<td style='color: red; '>Không duyệt</td>  ";
             // }
            
-            echo "<td><a class='btn btn-warning' href='Orderdetail.php?OrderID=".$item["OrderID"]."'>Kiểm tra đơn hàng</a></td>   </tr>";
+            echo "<td><a class='btn btn-warning' onclick='KiemTraDonHang(".$item["QuantitySP"].",".$item["Quantity"].")'  >Kiểm tra đơn hàng</a></td>   </tr>";
             } 
             $i++;
         }
       ?>
-      
+      <tr>
+        <td></td><td></td>
+        <td>Tổng Số Lượng: <?php echo"$SumQuantity";?></td>
+        <td>Tổng Tiền: <?php echo number_format($SumPrice, 0, '', ',');?> VNĐ</td>
+      </tr>
     </thead>
   </table>
   <div class="row" style="margin-top: 30px">
@@ -103,8 +114,27 @@
             window.location.href = "Orderdetail.php?HuyDonHang=true&OrderID="+id;
         }
     }
+     // Kiểm tra số lượng tốn
+    function KiemTraDonHang(SL_SP, SL){ 
+        
+      if(SL_SP <SL){ 
+        alert("Cảnh báo. Không đủ số lượng tốn");
+         
+        }else{
+            alert("Số lượng hàng trong kho vẫn còn đủ.");
+        }
+    }
 </script>
 <?php
+// Kiểm tra sl lồn 
+ 
+if(isset($_GET['KiemTraDonHang'])){   
+  $id = isset($_GET['OrderID']) ? (int)$_GET['OrderID'] : '';
+    if ($id){
+        $datas = OrderProduct::get_orderproducr($_GET['OrderID']);
+    }
+}
+
 // duyệt 
 if(isset($_GET['DuyetDonHang'])){
     require_once("Entities/orderProduct.class.php"); 

@@ -73,6 +73,7 @@
              else  if($item["Status"] == 2 ){
               echo "<td style='color: red; '>Không duyệt</td>  ";
             }
+            
            
             echo "<td><a class='btn btn-warning' href='Orderdetail.php?OrderID=".$item["OrderID"]."'>Xem Chi Tiết</a></td>   </tr>";
             } 
