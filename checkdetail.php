@@ -71,17 +71,44 @@
                 <div class="row main-left">
                     <div class="col-md-4"></div>
                       <div class="col-md-4" style="margin-top: 100px;">
-                          <form method="get" action="checkdetail.php" >
+                          <form method="post" action="" >
                               <div class="form-group" >
                                 <label>Mã đơn hàng</label>
                                   <input type="text" class="form-control" name="txtMadonhang" autofocus value="<?php echo !empty($_POST['txtMadonhang']) ? $_POST['txtMadonhang'] : ''; ?>" required>
                               </div>
                               <div class="form-group" style="float:right">
-                                  <input class="btn btn-primary" type="submit" name="search1" value="Tìm kiếm" required>
+                                  <input class="btn btn-primary" type="submit" name="ok" value="search" required>
                               </div>
                           </form>
                       </div>
                       <div class="col-md-4"></div>
+                      <?php
+                          require_once("Entities/orderProduct.class.php");
+                      ?>
+                      <?php
+                          if (isset($_REQUEST['ok']))
+                          {
+                            $button = isset($_GET['submit']) ? $_GET['submit'] : '';
+                              $search = isset($_GET['search']) ? $_GET['search'] : '';
+                            // $search = ($_GET['search']);
+                            // $search = addslashes($search);
+                            // $query = "select * from OrderID where orderdetail like '%$search%'";
+                            $con=mysqli_connect("localhost", "root", "", "ecommerce");
+                            // mysqli_connect("localhost", "root", "", "ecommerce");
+                            mysqli_query($con,"select * from OrderID where orderdetail like '%$search%'");
+                            // $sql = mysqli_query($query,"select * from OrderID where orderdetail like '%$search%'");
+                            $num = mysqli_num_rows($con,$result2);
+                            if ($num > 0 && $search != "")
+                            {
+                                 echo "
+                                       <tr style='background-color: #1ec908'>
+                                      <td>".$item["OrderID"]."</td>
+                                      <td>".$item["ProductID"]."</td>
+                                      <td>".$item["Quantty"]."</td>
+                                      </tr>";
+                              }
+                          }
+                      ?>
                   <div class="col-md-12">
                   <center>
                       <h1>Thông tin đơn hàng</h1>
@@ -93,33 +120,6 @@
                                 <th>Product Type</th>
                                 <th>Price</th>
                                 <th>Picture</th>
-                            </tr>
-
-                            <?php
-                              if (isset($_REQUEST['search1'])){
-                                $search = addslashes($_GET['search']);
-                                $query = "select * from orderdetail where OrderID like '%$search%'";
-                                mysql_connect("localhost", "root", "ecommerce", "orderdetail");
-                                $sql = mysql_query($query);
-                                $num = mysql_num_rows($sql);
-                                if ($num > 0 && $search != "")
-                                {
-                                      echo "
-                            			       <tr style='background-color: #1ec908'>
-                            				        <td>".$orderdetail["OrderID"]."</td>
-                                            <td>".$orderdetail["ProductID"]."</td>
-                                            <td>".$orderdetail["Quantity"]."</td>
-                                          </tr>";
-                                }
-                                }
-                            ?>
-
-                            <tr>
-                              <th>001</th>
-                                <th>Đắc nhân tâm</th>
-                                <th>Sách</th>
-                                <th>99000đ</th>
-                                <td><img src='uploads/".$item["Picture"]."' style='width:100px;height:100px'/></td>
                             </tr>
                         </table>
                         <table id="t01" border="1" style="width:25%">
