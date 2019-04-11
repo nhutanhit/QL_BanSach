@@ -57,44 +57,36 @@
            <span>Quản lý đơn hàng </span></a>
        </li>
         <li class="nav-item active">
-          <a class="nav-link" onclick="logout()" href="#">
+          <a class="nav-link" onclick="userlogout()" href="#">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Đăng xuất </span></a>
         </li>
       </ul>
       
-<script type="text/javascript">
-   function logout(){
-      var r = confirm("Bạn có muốn đăng xuất!");
-        if (r == true) {
-            window.location.href = "login.php";
+ <script>
+    function userlogout() {
+        var r = confirm("Bạn có muốn thoát!");
+        if (r == true) { 
+            //unset($_SESSION['fullname']); 
+            //window.location.href = "index.php";
+             window.location.href = "Index.php?Logout=true";
         }
-   }
- </script>
-
-<?php
-    require_once("Entities/user.class.php");
-    if(isset($_POST["submit"])){
-
-        $fullname = $_POST["txtName"];
-        $username = $_POST["txtUsername"];
-        $password = $_POST["txtPassword"];
-        $address = $_POST["txtAddress"];
-        $phone = $_POST["txtPhone"];
-        $role =  $_POST["txtRole"];
-
-        $newUser = new User($fullname, $username, $password, $address, $phone, $role);
-
-        $result = $newUser->save();
-        if($result){
-            header("Location: ManagerUser.php?inserted");
-        }else{
-            header("Location: ManagerUser.php?failure");
-        }} else {
-
+    }
+</script>
+    <?php
+        // mở khóa 
+        if(isset($_GET['Logout'])){
+            require_once("Entities/user.class.php");  
+            $UserID =  $_SESSION["userid"];
+            $result = User::Logout($UserID);
+            if(!$result){
+                echo "<script>window.location.href = 'Login.php?'; </script>";
+            }else{
+                unset($_SESSION['fullname']); 
+                echo "<script>window.location.href = 'Login.php?'; </script>";
+            }
         }
-
-?>
+    ?>
 <?php include_once("header.php"); ?>
 
 <?php
@@ -223,25 +215,28 @@
 		    <th>Quyền</th>
 			<th> </th>
 			<th> </th>
-            <th>Trạng thái</th>
+            <th>Trạng thái</th> 
+            <th>Trạng thái đăng nhập</th>
+            <th>Lượt truy cập</th>
 		</tr>
 	</thead>
 <?php
     $i = 1;
+     $luottruycap = 0 ; 
     foreach($users as $user){
         $id = $user["UserID"];
+       
+         $luottruycap+=$user["countlogin"];
         if($i == 1 && isset($_GET['inserted'])){
             
 			echo "
 			<tr style='background-color: #1ec908'>
-				<td>".$user["UserID"]."</td>
+				<td>".$user["FullName"]."</td>
                 <td>".$user["Username"]."</td>
                 <td>".$user["Password"]."</td>
 				<td>".$user["Address"]."</td>
                 <td>".$user["Phone"]."</td>
-                <td>".$user["Role"]."</td>
- 
-
+                <td>".$user["Role"]."</td> 
                 ";
                 if($user["Status"] !== 2 ){
                     echo "<td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
@@ -256,11 +251,18 @@
                     else{
                         echo "<td><button class='btn btn-danger' onclick='verify(".$user["UserID"].")'>Duyệt</button></td>";
                     }
+
+                 if($user["loginstatus"] == 1){
+                    echo "<td style='color: #155ab3;'>Đang truy cập</td>";
+                 }else{
+                     echo "<td style='color: #155ab3;'>Đang offline</td>";
+                 }
+                 echo "<td style='color: #155ab3;'>".$user["countlogin"]."</td>";
             echo "</tr>";
         } else {
             echo "
 			<tr>
-				<td>".$user["UserID"]."</td>
+				<td>".$user["FullName"]."</td>
                 <td>".$user["Username"]."</td>
                 <td>".$user["Password"]."</td>
 				<td>".$user["Address"]."</td>
@@ -282,11 +284,21 @@
                     else{
                         echo "<td><button class='btn btn-danger' onclick='verify(".$user["UserID"].")'>Duyệt</button></td>";
                     }
+                     if($user["loginstatus"] == 1){
+                    echo "<td style='color: #155ab3;'>Đang truy cập</td>";
+                 }else{
+                     echo "<td style='color: #155ab3;'>Đang offline</td>";
+                 }
+                  echo "<td style='color: #155ab3;'>".$user["countlogin"]."</td>";
             echo "</tr>";
         }
         $i++;
     }
 ?>
+<tr>
+    <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th> <th></th>   
+    <th>Tổng lượt đã truy cập: <?php echo  $luottruycap?></th>
+</tr>
 </table>
 <script>
     function myFunction(id) {

@@ -123,11 +123,26 @@
     function userlogout() {
         var r = confirm("Bạn có muốn thoát!");
         if (r == true) { 
-            unset($_SESSION['fullname']); 
-            window.location.href = "index.php";
+            //unset($_SESSION['fullname']); 
+            //window.location.href = "index.php";
+             window.location.href = "Index.php?Logout=true";
         }
     }
 </script>
+    <?php
+        // mở khóa 
+        if(isset($_GET['Logout'])){
+            require_once("Entities/user.class.php");  
+            $UserID =  $_SESSION["userid"];
+            $result = User::Logout($UserID);
+            if(!$result){
+                echo "<script>window.location.href = 'Index.php?logoutfailure'; </script>";
+            }else{
+                unset($_SESSION['fullname']); 
+                echo "<script>window.location.href = 'Index.php?logoutsuccess'; </script>";
+            }
+        }
+    ?>
     <!-- Page Content -->
     <div class="container">
 
