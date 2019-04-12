@@ -316,6 +316,7 @@ input[type=text]:placeholder, input[type=password]:placeholder {
               $_SESSION["fullname"] = $user['FullName'];
               $_SESSION["logged"] = $user['Role']; 
               $_SESSION["userid"] = $user['UserID']; 
+              $_SESSION["Address"] = $user['Address']; 
 
                //Gọi hàm tăng số lượng truy cập
               require_once('config/db.class.php');
