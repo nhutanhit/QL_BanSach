@@ -68,13 +68,13 @@
                 <div class="row main-left">
                     <div class="col-md-4"></div>
                       <div class="col-md-4" style="margin-top: 100px;">
-                          <form method="GET" action="#" >
+                          <form method="POST" action="#" >
                               <div class="form-group" >
                                 <label>Mã đơn hàng</label>
-                                  <input type="text" class="form-control" name="txtMadonhang" autofocus value="<?php echo !empty($_POST['txtMadonhang']) ? $_POST['txtMadonhang'] : ''; ?>" required>
+                                  <input type="text" class="form-control" name="search" autofocus value="<?php echo !empty($_POST['search']) ? $_POST['search'] : ''; ?>" required>
                               </div>
                               <div class="form-group" style="float:right">
-                                  <input class="btn btn-primary" type="submit"  value="search" required>
+                                  <input class="btn btn-primary" type="submit" name='searchBtn'  value="search" required>
                               </div>
                           </form>
                       </div>
@@ -93,12 +93,13 @@
                             </tr>
                                 <?php
                                 require_once('config/db.class.php');
+                                if(isset($_POST['searchBtn'])){
                                 $db = new Db();
                                 $sql = "SELECT orderproduct.Status, product.ProductName,
                                 product.ProductID,product.Quantity as QuantitySP,product.Price, product.Picture,
                                 orderdetail.OrderID,orderdetail.Quantity FROM orderproduct,
                                 orderdetail, product where orderproduct.OrderID = orderdetail.OrderID and
-                                product.ProductID =orderdetail.ProductID and orderproduct.OrderID = '1'";
+                                product.ProductID =orderdetail.ProductID and orderproduct.OrderID = ".$_POST['search'];
                                 $result = $db->select_to_array($sql);
                                 $SumQuantity = 0;
                                 $SumPrice = 0;
@@ -118,6 +119,7 @@
                                         <td> ".number_format($item["Price"]*$item["Quantity"], 0, '', ',') ."</td>";
                                       $i++;
                                       }
+                                    }
                                 ?>
                         </table>
                         <table id="t01" border="1" style="width:80%">
@@ -127,7 +129,7 @@
                           <th>Tổng tiền: </th>
                           <th><?php echo number_format($SumPrice, 0, '', ',');?> VNĐ</td>
                           <th>Trạng thái: </th>
-                          <th>
+                          <!-- <th>
                             <?php
                               if($Status == 0 ){
                                 echo "<td style='color: #28a745; '>Chờ xử lý</td>  ";
@@ -137,7 +139,7 @@
                                 echo "<td style='color: red; '>Không duyệt</td>  ";
                               }
                             ?>
-                          </th>
+                          </th> -->
                         </tr>
                         </table>
                       </div>
