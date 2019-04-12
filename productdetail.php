@@ -40,7 +40,7 @@
 
 <body>
  <?php
-		 
+		 session_start();
 		require 'Entities/product.class.php';
 		 
 		// Lấy thông tin hiển thị lên để người dùng sửa
@@ -160,7 +160,10 @@
                                          
                                      echo "  <p>Nội dung: ".$item["Description"]."</p>
                                         <h3>".number_format($item["Price"],0)." VNĐ</h3>
-                                       
+                                        <form  method='post' action='#'>
+                                            <input type='hidden' name='ProductID' value='".$item["ProductID"]."'>
+                                            <button class='btn btn-info' name='buy'>Mua</button>
+                                        </form>
                                     </div>
                                     <div class='break'></div>
                                 </div>";
@@ -178,6 +181,33 @@
         <!-- /.row -->
     </div>
     <!-- end Page Content -->
+    <?php 
+    if(isset($_POST['buy'])){
+        $quantity = 1;
+        $productID = $_POST['ProductID'];
+        $new_product = array(array('id'=>$productID,'quantity' => 1));
+        if(isset($_SESSION["products"])){
+            $found = false ;
+            foreach($_SESSION["products"] as $cart_itm){
+                if($cart_itm['id'] == $productID){
+                    $quantity2  = $cart_itm["quantity"]+1;
+                    $product[] = array('id'=>$cart_itm["id"], 'quantity'=>$quantity2);
+                    $found = true;
+                }else{
+                    $product[] = array('id'=>$cart_itm["id"],'quantity' =>$cart_itm["quantity"]);
+                }
+
+            }
+            if($found){
+                $_SESSION["products"] = $product;
+            } else {
+                $_SESSION["products"] = array_merge($product, $new_product);
+            }
+        }else{
+            $_SESSION["products"] = $new_product;
+        }
+    }
+    ?>
 
     <!-- Footer -->
     <hr>
