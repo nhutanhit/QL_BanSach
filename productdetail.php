@@ -104,7 +104,9 @@
                     <li>
                     	<a href="#">Đăng xuất</a>
                     </li>
-                    
+                     <li>
+                        <a href="shopcart.php">Giỏ hàng</a>
+                    </li>
                 </ul>
             </div>
 
