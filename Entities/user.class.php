@@ -7,30 +7,30 @@ class User
     public $Username;
     public $Password;
     public $Address;
-    public $Phone;
-    public $Role;
+    public $Phone; 
     public $Status; 
+    public $DepartmentID ;
 
-    public function __construct($fullname, $username, $password, $address, $phone, $role, $status){
+    public function __construct($fullname, $username, $password, $address, $phone, $status, $departmentID){
         $this->FullName = $fullname;
         $this->Username = $username;
         $this->Password = $password;
         $this->Address = $address;
-        $this->Phone = $phone;
-        $this->Role = $role;
+        $this->Phone = $phone; 
         $this->Status = $status; 
+        $this->DepartmentID = $departmentID; 
     }
 
     public function save(){
         $db = new Db();
-        $sql = "INSERT INTO user (FullName, Username, Password, Address, Phone, Role, Status) VALUES ('$this->FullName','$this->Username','$this->Password','$this->Address',' $this->Phone','$this->Role', '$this->Status')";
+        $sql = "INSERT INTO user (FullName, Username, Password, Address, Phone, Status, DepartmentID ) VALUES ('$this->FullName','$this->Username','$this->Password','$this->Address',' $this->Phone', '$this->Status' , '$this->DepartmentID')";
         $result = $db->query_execute($sql);
         return $result;
     }
 
     public function update($id){
         $db = new Db();
-        $sql = "UPDATE user SET FullName = '$this->FullName' , Username = '$this->Username', Password = '$this->Password', Address = '$this->Address', Phone = '$this->Phone', Role = '$this->Role' WHERE UserID =".$id;
+        $sql = "UPDATE user SET FullName = '$this->FullName' , Username = '$this->Username', Password = '$this->Password', Address = '$this->Address', Phone = '$this->Phone', DepartmentID = '$this->DepartmentID' WHERE UserID =".$id;
         $result = $db->query_execute($sql);
         return $result;
     }
@@ -61,7 +61,7 @@ class User
 
     public function list_user(){
         $db = new Db();
-        $sql = "SELECT * FROM user";
+        $sql = "SELECT * FROM user , department where user.DepartmentID = department.DepartmentID";
         $result = $db->select_to_array($sql);
         return $result;
     }
@@ -75,7 +75,7 @@ class User
 
     public function login($user,$pass){
         $db = new Db();
-        $sql = "SELECT * FROM user where Username ='".$user."' and Password ='".md5($pass)."'"  ;  
+        $sql = "SELECT * FROM user , department where user.DepartmentID = department.DepartmentID and  Username ='".$user."' and Password ='".md5($pass)."'"  ;  
         $result = $db->query_execute($sql);
         return $result;
     }

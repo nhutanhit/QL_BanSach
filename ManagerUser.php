@@ -57,36 +57,47 @@
            <span>Quản lý đơn hàng </span></a>
        </li>
         <li class="nav-item active">
-          <a class="nav-link" onclick="userlogout()" href="#">
+          <a class="nav-link" onclick="logout()" href="#">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Đăng xuất </span></a>
         </li>
       </ul>
       
- <script>
-    function userlogout() {
-        var r = confirm("Bạn có muốn thoát!");
-        if (r == true) { 
-            //unset($_SESSION['fullname']); 
-            //window.location.href = "index.php";
-             window.location.href = "Index.php?Logout=true";
+<script type="text/javascript">
+   function logout(){
+      var r = confirm("Bạn có muốn đăng xuất!");
+        if (r == true) {
+            window.location.href = "login.php";
+        }
+   }
+ </script>
+
+<?php
+    require_once("Entities/user.class.php");
+    if(isset($_POST["submit"])){
+
+        $fullname = $_POST["txtName"];
+        $username = $_POST["txtUsername"];
+        $password = $_POST["txtPassword"];
+        $address = $_POST["txtAddress"];
+        $phone = $_POST["txtPhone"];
+        $departmentID =  $_POST["txtDepartmentID"];
+
+        $newUser = new User($fullname, $username, $password, $address, $phone,1,  $departmentID );
+
+        $result = $newUser->save();
+        if($result){
+            header("Location: ManagerUser.php?inserted");
+        }else{
+            header("Location: ManagerUser.php?failure");
         }
     }
-</script>
-    <?php
-        // mở khóa 
-        if(isset($_GET['Logout'])){
-            require_once("Entities/user.class.php");  
-            $UserID =  $_SESSION["userid"];
-            $result = User::Logout($UserID);
-            if(!$result){
-                echo "<script>window.location.href = 'Login.php?'; </script>";
-            }else{
-                unset($_SESSION['fullname']); 
-                echo "<script>window.location.href = 'Login.php?'; </script>";
-            }
-        }
-    ?>
+        // }}
+        //  else {
+
+        // }
+
+?>
 <?php include_once("header.php"); ?>
 
 <?php
@@ -106,6 +117,11 @@
 
 <?php
     require_once('config/db.class.php');
+     $db2 = new Db();
+     $sql2 = "Select * from department";
+     $result1 = $db2->select_to_array($sql2);
+
+
     if(isset($_GET['edit'])){
     $id = isset($_GET['UserID']) ? (int)$_GET['UserID'] : '';
     $datas = User::get_user($id);
@@ -138,8 +154,20 @@
                     <input type="text" class="form-control" name="txtPhone" value="<?php echo isset($data['Phone']) ? $data['Phone'] : '' ?>"required>
                 </div>
                 <div class="form-group">
-                    <label>Quyền</label>
-                    <input type="text" class="form-control" name="txtRole" value="<?php echo isset($data['Role']) ? $data['Role'] : '' ?>"required>
+                   <!--  <label>Quyền</label>
+                    <input type="text" class="form-control" name="txtRole" value="<?php echo isset($data['Role']) ? $data['Role'] : '' ?>"required> -->
+                     <label>Phòng Ban</label>
+                            <select name="txtDepartmentID" class="form-control">
+                            <?php
+                            foreach($result1 as $item){
+                                if($data['DepartmentID'] == $item["DepartmentID"]){
+                                    echo '<option value="'.$item["DepartmentID"].'" selected>'.$item["DepartmentName"].'</option>';
+                                }else {
+                                    echo '<option value="'.$item["DepartmentID"].'">'.$item["DepartmentName"].'</option>';
+                                }
+                                }
+                            ?>
+                            </select>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" name="btnsubmit" value="Sửa user">
@@ -179,8 +207,20 @@
                         <input type="text" name="txtPhone" class="form-control" value="<?php echo !empty($_POST['txtPhone']) ? $_POST['txtPhone'] : '' ?>" required>
                     </div>
                     <div class="form-group">
-                        <label>Quyền</label>
-                        <input type="text" name="txtRole" class="form-control" value="<?php echo !empty($_POST['txtRole']) ? $_POST['txtRole'] : '' ?>" required>
+                     <!--    <label>Quyền</label>
+                        <input type="text" name="txtRole" class="form-control" value="<?php echo !empty($_POST['txtRole']) ? $_POST['txtRole'] : '' ?>" required> -->
+                         <label>Phòng Ban</label>
+                            <select name="txtDepartmentID" class="form-control">
+                            <?php
+                            foreach($result1 as $item){
+                                if($data['DepartmentID'] == $item["DepartmentID"]){
+                                    echo '<option value="'.$item["DepartmentID"].'" selected>'.$item["DepartmentName"].'</option>';
+                                }else {
+                                    echo '<option value="'.$item["DepartmentID"].'">'.$item["DepartmentName"].'</option>';
+                                }
+                                }
+                            ?>
+                            </select>
                     </div>
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" name="submit" value="Thêm User">
@@ -215,28 +255,25 @@
 		    <th>Quyền</th>
 			<th> </th>
 			<th> </th>
-            <th>Trạng thái</th> 
-            <th>Trạng thái đăng nhập</th>
-            <th>Lượt truy cập</th>
+            <th>Trạng thái</th>
 		</tr>
 	</thead>
 <?php
     $i = 1;
-     $luottruycap = 0 ; 
     foreach($users as $user){
         $id = $user["UserID"];
-       
-         $luottruycap+=$user["countlogin"];
         if($i == 1 && isset($_GET['inserted'])){
             
 			echo "
 			<tr style='background-color: #1ec908'>
-				<td>".$user["FullName"]."</td>
+				<td>".$user["UserID"]."</td>
                 <td>".$user["Username"]."</td>
                 <td>".$user["Password"]."</td>
 				<td>".$user["Address"]."</td>
                 <td>".$user["Phone"]."</td>
-                <td>".$user["Role"]."</td> 
+                <td>".$user["Role"]."</td>
+ 
+
                 ";
                 if($user["Status"] !== 2 ){
                     echo "<td><a class='btn btn-warning' href='ManagerUser.php?edit=true&UserID=".$user["UserID"]."'>Sửa</a></td>
@@ -251,18 +288,11 @@
                     else{
                         echo "<td><button class='btn btn-danger' onclick='verify(".$user["UserID"].")'>Duyệt</button></td>";
                     }
-
-                 if($user["loginstatus"] == 1){
-                    echo "<td style='color: #155ab3;'>Đang truy cập</td>";
-                 }else{
-                     echo "<td style='color: #155ab3;'>Đang offline</td>";
-                 }
-                 echo "<td style='color: #155ab3;'>".$user["countlogin"]."</td>";
             echo "</tr>";
         } else {
             echo "
 			<tr>
-				<td>".$user["FullName"]."</td>
+				<td>".$user["UserID"]."</td>
                 <td>".$user["Username"]."</td>
                 <td>".$user["Password"]."</td>
 				<td>".$user["Address"]."</td>
@@ -284,21 +314,11 @@
                     else{
                         echo "<td><button class='btn btn-danger' onclick='verify(".$user["UserID"].")'>Duyệt</button></td>";
                     }
-                     if($user["loginstatus"] == 1){
-                    echo "<td style='color: #155ab3;'>Đang truy cập</td>";
-                 }else{
-                     echo "<td style='color: #155ab3;'>Đang offline</td>";
-                 }
-                  echo "<td style='color: #155ab3;'>".$user["countlogin"]."</td>";
             echo "</tr>";
         }
         $i++;
     }
 ?>
-<tr>
-    <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th> <th></th>   
-    <th>Tổng lượt đã truy cập: <?php echo  $luottruycap?></th>
-</tr>
 </table>
 <script>
     function myFunction(id) {
@@ -372,8 +392,8 @@ if(isset($_GET['edit']))
     $password = $_POST["txtPassword"];
     $address = $_POST["txtAddress"];
     $phone = $_POST["txtPhone"];
-    $role = $_POST["txtRole"];
-    $newUser = new User($fullName, $username, $password, $address, $phone, $role);
+    $departmentID = $_POST["txtDepartmentID"];
+    $newUser = new User($fullName, $username, $password, $address, $phone, $departmentID);
 
     $result = $newUser->update($_GET['UserID']);
 
