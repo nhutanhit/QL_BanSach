@@ -52,14 +52,14 @@
       require_once('config/db.class.php');
 		    $db2 = new Db();
 		    $sql2 = "Select * from category";
-		    $result1 = $db2->select_to_array($sql2);
-      if(isset($_SESSION['products'])) {
+        $result1 = $db2->select_to_array($sql2);
+        
         $sl = 0;
         $totalPrice = 0;
+      if(isset($_SESSION['products'])) {
         foreach($_SESSION['products'] as $item){ 
       $datas = Product::get_product($item['id']);
       foreach($datas as $data){
-      
       ?>
       <tr>
    			  <th><?php echo $data['ProductID'] ?></th>
@@ -104,18 +104,29 @@ function totalByProcd(){
 <a class="btn btn-primary ml-2" href="index.php">Quay lại</a>
 </div>
 <?php 
-  require 'Entities/orderproduct.class.php';
-  require_once('config/db.class.php');
-  if(isset($_POST['thanhtoan']) && $_SESSION["logged"] == 'user'){
-    $db  = new Db();
-    $sql3 = "insert into orderproduct (OrderDate, ShipDate, ShipAddress, Status, UserID) values ('".date("Y-m-d h:i:sa")."','".date("Y-m-d h:i:sa")."','".$_SESSION['Address']."',1,".$_SESSION['userid'].")";
-    $result1 = $db3->query_execute($sql3);
-    foreach($_SESSION['products'] as $item){ 
-    $db4 = new Db();
-     $sql4 = "INSERT INTO orderdetail (OrderID, ProductID, Quantity) VALUES (".$db3->connect()->insert_id.",".$item['id'].",".$item['quantity'].")";
-     $result2 = $db4->query_execute($sql4);
-    }
-  }
+ require 'Entities/orderproduct.class.php';
+ require_once('config/db.class.php');
+ if(isset($_POST['thanhtoan']) && $_SESSION["logged"] == 'enduser'){
+   $db3  = new Db();
+   $sql3 = "insert into orderproduct (OrderDate, ShipDate, ShipAddress, Status, UserID) values ('".date("Y-m-d h:i:sa")."','".date("Y-m-d h:i:sa")."','".$_SESSION['Address']."',0,".$_SESSION['userid'].")";
+   $result1 = $db3->query_execute($sql3);
+   $sql4 = "INSERT INTO orderdetail (OrderID, ProductID, Quantity) VALUES ";
+   $i=count($_SESSION['products'])-1;
+   foreach($_SESSION['products'] as $item){ 
+     $db4 = new Db();
+     $sql4 .= "(".$db3->connect()->insert_id.",".$item['id'].",".$item['quantity'].")";
+     if($i==0)
+       $sql4 .=";";
+     else
+       $sql4 .=",";
+     $db4->query_execute($sql4);
+     $i--;
+   }
+   unset($_SESSION['products']);
+   echo "<script>alert('Mua hàng thành công')</script>";
+   
+   echo "<script>window.location.href = 'index.php'</script>";
+ }
 ?>
 </center>
 </div>

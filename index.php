@@ -141,6 +141,7 @@
                 echo "<script>window.location.href = 'Index.php?logoutfailure'; </script>";
             }else{
                 unset($_SESSION['fullname']); 
+                unset($_SESSION['products']);
                 echo "<script>window.location.href = 'Index.php?logoutsuccess'; </script>";
             }
         }

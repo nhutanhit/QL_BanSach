@@ -208,6 +208,7 @@
         }else{
             $_SESSION["products"] = $new_product;
         }
+        echo "<script>alert('Đã thêm vào giỏ hàng')</script>";
     }
     ?>
 
