@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -39,34 +40,82 @@
   		    <th>Product Name</th>
   		    <th>Product Type</th>
   		    <th>Price</th>
-  		    <th>Picture</th>
+          <th>Picture</th>
+          <th>Số lượng</th>
           <th>Cập nhật</th>
     			<th>Xóa</th>
   		</tr>
     </thead>
+    <?php  
+    
+      require 'Entities/product.class.php';
+      require_once('config/db.class.php');
+		    $db2 = new Db();
+		    $sql2 = "Select * from category";
+		    $result1 = $db2->select_to_array($sql2);
+      if(isset($_SESSION['products'])) {
+        $sl = 0;
+        $totalPrice = 0;
+        foreach($_SESSION['products'] as $item){ 
+      $datas = Product::get_product($item['id']);
+      foreach($datas as $data){
+      
+      ?>
       <tr>
-   			<th>1</th>
-  		    <th>Mập</th>
-  		    <th>Địt</th>
-  		    <th>1đ</th>
-  		    <td><img src='uploads/".$item["Picture"]."' style='width:100px;height:100px'/></td>
-          <td><a class='btn btn-warning' href="#">Cập nhật</a></td>
+   			  <th><?php echo $data['ProductID'] ?></th>
+          <th><?php echo $data['ProductName'] ?></th>
+          <?php foreach ($result1 as $value) { 
+              if($value['CateID'] == $data['CateID']){?>
+            <th><?php echo $value['CategoryName'] ?></th>
+          <?php }} ?>
+  		    <th id="price"><?php echo $data['Price'] ?></th>
+          <td><img src='uploads/<?php echo $data["Picture"]?>' style='width:100px;height:100px'/></td>
+          <th><?php echo $item['quantity'] ?></th>
+          <td><a class='btn btn-warning' onclick="document.getElementById('quantity').value*" href="#">Cập nhật</a></td>
     			<td><a onclick='myFunction(".$item["ProductID"].");' class='btn btn-danger' >Xóa</a></td>
-  		</tr>
+      </tr>
+    <?php 
+          $sl += $item['quantity'];
+          $totalPrice += $data['Price']*$item['quantity']; }}} ?>
   </table>
 
   <table id="t01" border="1" style="width:25%">
   <tr>
     <th>Số lượng: </th>
-    <th>?? </th>
+    <th><?php echo $sl?></th>
       <th>Tổng tiền: </th>
-      <th>??</th>
+      <th><?php echo $totalPrice?></th>
   </tr>
 </table>
 </div>
+<!-- <script>
+function totalByProcd(){
+  quantity = document.getElementById('quantity').value;
+  price = document.getElementById('price').innerText;
+  document.getElementById("tt").innerText = quantity*price;
+}
+</script> -->
 <div class="row" style="margin-top: 30px"></div>
-<a class="btn btn-primary ml-2" href="#">Thanh toán</a>
+<form action="#" method="post">
+  <input type="hidden" name="sl" value="<?php echo $sl?>">
+  <input type="hidden" name="totoalPrice" value="<?php echo $totalPrice?>">
+  <input type="submit" class="btn btn-primary" name="thanhtoan" value="Thanh Toán">
+</form>
 <a class="btn btn-primary ml-2" href="index.php">Quay lại</a>
 </div>
+<?php 
+  require 'Entities/orderproduct.class.php';
+  require_once('config/db.class.php');
+  if(isset($_POST['thanhtoan']) && $_SESSION["logged"] == 'user'){
+    $db  = new Db();
+    $sql3 = "insert into orderproduct (OrderDate, ShipDate, ShipAddress, Status, UserID) values ('".date("Y-m-d h:i:sa")."','".date("Y-m-d h:i:sa")."','".$_SESSION['Address']."',1,".$_SESSION['userid'].")";
+    $result1 = $db3->query_execute($sql3);
+    foreach($_SESSION['products'] as $item){ 
+    $db4 = new Db();
+     $sql4 = "INSERT INTO orderdetail (OrderID, ProductID, Quantity) VALUES (".$db3->connect()->insert_id.",".$item['id'].",".$item['quantity'].")";
+     $result2 = $db4->query_execute($sql4);
+    }
+  }
+?>
 </center>
 </div>
