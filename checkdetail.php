@@ -93,6 +93,8 @@
                             </tr>
                                 <?php
                                 require_once('config/db.class.php');
+                                  $SumQuantity = 0;
+                                $SumPrice = 0;
                                 if(isset($_POST['searchBtn'])){
                                 $db = new Db();
                                 $sql = "SELECT orderproduct.Status, product.ProductName,
@@ -101,8 +103,7 @@
                                 orderdetail, product where orderproduct.OrderID = orderdetail.OrderID and
                                 product.ProductID =orderdetail.ProductID and orderproduct.OrderID = ".$_POST['search'];
                                 $result = $db->select_to_array($sql);
-                                $SumQuantity = 0;
-                                $SumPrice = 0;
+                              
                                 $i=1;
                                   foreach($result as $item){
                                   $id = $item["OrderID"];
@@ -129,7 +130,7 @@
                           <th>Tổng tiền: </th>
                           <th><?php echo number_format($SumPrice, 0, '', ',');?> VNĐ</td>
                           <th>Trạng thái: </th>
-                          <!-- <th>
+                           <th>
                             <?php
                               if($Status == 0 ){
                                 echo "<td style='color: #28a745; '>Chờ xử lý</td>  ";
@@ -139,7 +140,7 @@
                                 echo "<td style='color: red; '>Không duyệt</td>  ";
                               }
                             ?>
-                          </th> -->
+                          </th>  
                         </tr>
                         </table>
                       </div>
