@@ -154,8 +154,8 @@ if(isset($_POST["submit"])){
                       if($i == 1 && isset($_GET['inserted'])){
                           echo "
                           <tr style='background-color: #1ec908'>
-                          <td>".$item["CateID"]."</td>
-                          <td>".$item["CategoryName"]."</td>";
+                          <td <a>".$item["CateID"]."</td>
+                         <td><a class='btn btn-defulf' href='all_in_one_category.php?detailCate=true&CateID=".$item["CategoryName"]."'>".$item["CategoryName"]."</a></td>";
                           echo "    <td>".$item["Description"]."</td>
                           <td><a class='btn btn-warning' href='all_in_one_category.php?edit=true&CateID=".$item["CateID"]."'>Sửa</a></td>
                           <td><button class='btn btn-danger' onclick='myFunction(".$item["CateID"].")' >Xóa</button></td>
@@ -164,7 +164,7 @@ if(isset($_POST["submit"])){
                         echo "
                         <tr>
                         <td>".$item["CateID"]."</td>
-                        <td>".$item["CategoryName"]."</td>";
+                         <td><a class='btn btn-defulf' href='all_in_one_category.php?detailCate=true&CateID=".$item["CategoryName"]."'>".$item["CategoryName"]."</a></td>";
                         echo "    <td>".$item["Description"]."</td>
                         <td><a class='btn btn-warning' href='all_in_one_category.php?edit=true&CateID=".$item["CateID"]."'>Sửa</a></td>
                         <td><button class='btn btn-danger' onclick='myFunction(".$item["CateID"].")' >Xóa</button></td>

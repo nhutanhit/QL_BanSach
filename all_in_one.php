@@ -62,6 +62,11 @@
             <span>Quản lý đơn hàng </span></a>
         </li> 
         <li class="nav-item active">
+          <a class="nav-link"  href="ListDetail.php">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span> </span></a>
+        </li> 
+        <li class="nav-item active">
           <a class="nav-link" onclick="userlogout()" href="#">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Đăng xuất </span></a>
