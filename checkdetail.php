@@ -21,7 +21,7 @@
 <script type="text/javascript" src="js/noel.js"></script>
 </head>
 <body>
- 
+
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -61,26 +61,24 @@
                 </ul>
             </div>
         </div>
-    </nav> 
+    </nav>
 
     <div class="container">
     	<div class="row carousel-holder">
                 <div class="row main-left">
                     <div class="col-md-4"></div>
                       <div class="col-md-4" style="margin-top: 100px;">
-                          <form method="GET" action="#" >
+                          <form method="POST" action="#" >
                               <div class="form-group" >
                                 <label>Mã đơn hàng</label>
-                                  <input type="text" class="form-control" name="txtMadonhang" autofocus value="<?php echo !empty($_POST['txtMadonhang']) ? $_POST['txtMadonhang'] : ''; ?>" required>
+                                  <input type="text" class="form-control" name="search" autofocus value="<?php echo !empty($_POST['search']) ? $_POST['search'] : ''; ?>" required>
                               </div>
                               <div class="form-group" style="float:right">
-                                  <input class="btn btn-primary" type="submit"  value="search" required>
+                                  <input class="btn btn-primary" type="submit" name='searchBtn'  value="search" required>
                               </div>
                           </form>
                       </div>
                       <div class="col-md-4"></div>
-                      
-                     
                   <div class="col-md-12">
                   <center>
                       <h1>Thông tin đơn hàng</h1>
@@ -91,77 +89,68 @@
                                 <th>Tên sản phẩm</th>
                                 <th>Hình ảnh</th>
                                 <th>Số lượng</th>
-                                <th>Thành tiền</th> 
+                                <th>Thành tiền</th>
                             </tr>
-                               <?php
-
-                                // if (isset($_GET['submit']))
-                                //   { 
-                                          require_once('config/db.class.php');
-                                          $db = new Db();
-                                          $sql = "SELECT orderproduct.Status, product.ProductName, product.ProductID,product.Quantity as QuantitySP,product.Price, product.Picture, orderdetail.OrderID,orderdetail.Quantity FROM orderproduct,  orderdetail, product where orderproduct.OrderID = orderdetail.OrderID and product.ProductID =orderdetail.ProductID and orderproduct.OrderID = 1"; //.$search;
-                                          $result = $db->select_to_array($sql);
-                                         $SumQuantity = 0; 
-                                         $SumPrice = 0;
-
-                                      $i=1; 
-                                       foreach($result as $item){
-                                        $id = $item["OrderID"];
-                                          $SumQuantity += $item["Quantity"]; 
-                                          $SumPrice += $item["Price"]*$item["Quantity"]; 
-                                          $Status = $item["Status"]; 
-                                        echo "
-                                        <tr>
-                                          <td>".$i++."</td>
-                                          <td>".$item["ProductName"]."</td> 
-                                          <td><img width='200px' height='200px' class='img-responsive' src='uploads/".$item["Picture"]."'></td>  
-                                          <td>".$item["Quantity"]."</td>
-                                          <td> ".number_format($item["Price"]*$item["Quantity"], 0, '', ',') ."</td>
-                                           ";
-                                          
-                                          
-                                         
-                                          // echo "<td><a class='btn btn-warning' href='Orderdetail.php?OrderID=".$item["OrderID"]."'>Xem Chi Tiết</a></td>   </tr>";
-                                           
-                                          $i++;
+                                <?php
+                                require_once('config/db.class.php');
+                                if(isset($_POST['searchBtn'])){
+                                $db = new Db();
+                                $sql = "SELECT orderproduct.Status, product.ProductName,
+                                product.ProductID,product.Quantity as QuantitySP,product.Price, product.Picture,
+                                orderdetail.OrderID,orderdetail.Quantity FROM orderproduct,
+                                orderdetail, product where orderproduct.OrderID = orderdetail.OrderID and
+                                product.ProductID =orderdetail.ProductID and orderproduct.OrderID = ".$_POST['search'];
+                                $result = $db->select_to_array($sql);
+                                $SumQuantity = 0;
+                                $SumPrice = 0;
+                                $i=1;
+                                  foreach($result as $item){
+                                  $id = $item["OrderID"];
+                                  $SumQuantity += $item["Quantity"];
+                                  $SumPrice += $item["Price"]*$item["Quantity"];
+                                  $Status = $item["Status"];
+                                    echo "
+                                      <tr>
+                                        <td>".$i++."</td>
+                                        <td>".$item["ProductName"]."</td>
+                                        <td><img width='200px' height='200px' class='img-responsive'
+                                        src='uploads/".$item["Picture"]."'></td>
+                                        <td>".$item["Quantity"]."</td>
+                                        <td> ".number_format($item["Price"]*$item["Quantity"], 0, '', ',') ."</td>";
+                                      $i++;
                                       }
-                                   // }
-                                ?> 
+                                    }
+                                ?>
                         </table>
                         <table id="t01" border="1" style="width:80%">
                         <tr>
                           <th>Tồng Số lượng: </th>
                           <th> <?php echo"$SumQuantity";?></th>
-                            <th>Tổng tiền: </th>
-                           <th><?php echo number_format($SumPrice, 0, '', ',');?> VNĐ</td>
-                            <th>Trạng thái: </th>
-                            <th>
-                              <?php
-                                   if($Status == 0 ){
-                                      echo "<td style='color: #28a745; '>Chờ xử lý</td>  ";
-                                    }
-                                    else  if($Status == 1 ){
-                                      echo "<td style='color: #ffc107; '>Đã duyệt</td>  ";
-                                    }
-                                     else  if($Status== 2 ){
-                                      echo "<td style='color: red; '>Không duyệt</td>  ";
-                                    } 
-                              ?>
-                            </th>
+                          <th>Tổng tiền: </th>
+                          <th><?php echo number_format($SumPrice, 0, '', ',');?> VNĐ</td>
+                          <th>Trạng thái: </th>
+                          <!-- <th>
+                            <?php
+                              if($Status == 0 ){
+                                echo "<td style='color: #28a745; '>Chờ xử lý</td>  ";
+                              }else  if($Status == 1 ){
+                                echo "<td style='color: #ffc107; '>Đã duyệt</td>  ";
+                              }else  if($Status== 2 ){
+                                echo "<td style='color: red; '>Không duyệt</td>  ";
+                              }
+                            ?>
+                          </th> -->
                         </tr>
-                      </table>
+                        </table>
                       </div>
-                     <!--  <div class="row" style="margin-top: 30px"></div>
-                      <a class="btn btn-primary ml-2" href="#">Thanh toán</a>
-                      <a class="btn btn-primary ml-2" href="index.php">Quay lại</a> -->
-                  </center>
+                    </center>
                   </div>
         				</div>
 	            </div>
         	</div>
         </div>
     </div>
-    <hr>
+  <hr>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
